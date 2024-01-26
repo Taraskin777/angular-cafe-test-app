@@ -1,30 +1,30 @@
 {
   "categories": [
     {
-      "id": "1",
+      "id": 1,
       "name": "Side Dishes",
       "image": "",
       "dishes": [
         {
-          "id": "1",
+          "id": 1,
           "name": "Roasted Vegetables",
           "image": "",
           "description": "",
-          "price": "19.99"
+          "price": 19.99
         }
       ]
     },
     {
-      "id": "2",
+      "id": 2,
       "name": "Main Courses",
       "image": "",
       "dishes": [
         {
-          "id": "1",
+          "id": 1,
           "name": "Fried chicken",
           "image": "",
           "description": "",
-          "price":"29.99"
+          "price":29.99
         }
       ]
     }
