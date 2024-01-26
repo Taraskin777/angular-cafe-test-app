@@ -1,0 +1,12 @@
+
+h1 {
+   text-align: center;
+   color: blue;
+   margin-bottom:0;
+}
+
+.login {
+  width: 30px;
+  margin-left: 20px;
+  cursor: pointer;
+}
