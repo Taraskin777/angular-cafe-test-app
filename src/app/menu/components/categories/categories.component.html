@@ -1,7 +1,8 @@
 <main>
-  <ul>
-    <li *ngFor="let category of categories; trackBy: trackByCategory">
-      {{ category.name }}
-    </li>
-  </ul>
+   <ul>
+      <li *ngFor="let category of categories; trackBy: trackByCategory">
+         <img src={{category.image}} alt={{category.name}}>
+         <p>{{ category.name }}</p> 
+      </li>
+   </ul>
 </main>
