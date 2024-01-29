@@ -1,16 +1,3 @@
-<!-- <main>
-  <ul *ngIf="(categories$ | async) && (categories$ | async).length > 0; else noCategories">
-    <li *ngFor="let category of categories$; trackBy: trackByCategory">
-      <img src="{{ category.image }}" alt="{{ category.name }}" />
-      <p>{{ category.name }}</p>
-    </li>
-  </ul>
-  <ng-template #noCategories>
-    <h2>No Categories!</h2>
-  </ng-template>
-</main> -->
-
-
 <main>
   <ng-container *ngIf="(categories$ | async) as categories">
     <ul *ngIf="categories.length > 0; else noCategories">
