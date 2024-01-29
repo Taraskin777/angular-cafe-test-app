@@ -20,14 +20,14 @@ export class CategoriesComponent implements OnInit {
     this.dataService
       .getData()
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(
-        (data: Categories[]) => {
+      .subscribe({
+        next: (data: Categories[]): void => {
           this.categories = data;
         },
-        error => {
+        error: (error: any) => {
           console.error(error);
-        }
-      );
+        },
+      });
   }
 
   trackByCategory(index: number, item: Categories): number {
