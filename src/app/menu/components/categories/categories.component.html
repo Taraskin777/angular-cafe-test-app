@@ -1,8 +1,11 @@
 <main>
-   <ul>
-      <li *ngFor="let category of categories; trackBy: trackByCategory">
-         <img src={{category.image}} alt={{category.name}}>
-         <p>{{ category.name }}</p> 
-      </li>
-   </ul>
+  <ul *ngIf="categories && categories.length > 0; else noCategories">
+    <li *ngFor="let category of categories; trackBy: trackByCategory">
+      <img src="{{ category.image }}" alt="{{ category.name }}" />
+      <p>{{ category.name }}</p>
+    </li>
+  </ul>
+  <ng-template #noCategories>
+    <h2>No Categories!</h2>
+  </ng-template>
 </main>
