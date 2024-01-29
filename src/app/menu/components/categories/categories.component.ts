@@ -1,33 +1,33 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, DestroyRef } from '@angular/core';
 import { DataService } from 'src/app/core/services/data.service';
 import { Categories } from 'src/app/shared/interfaces/categories';
-import { Subscription } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.component.html',
   styleUrls: ['./categories.component.css'],
 })
-export class CategoriesComponent implements OnInit, OnDestroy {
-  subscription: Subscription = new Subscription();
+export class CategoriesComponent implements OnInit {
   categories: Categories[] = [];
 
-  constructor(private dataService: DataService) {}
+  constructor(
+    private dataService: DataService,
+    private destroyRef: DestroyRef
+  ) {}
 
   ngOnInit(): void {
-    this.subscription = this.dataService.getData().subscribe(
-      (data: Categories[]) => {
-        this.categories = data;
-        this.categories.forEach(category => console.log(category.name));
-      },
-      error => {
-        console.error(error);
-      }
-    );
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.dataService
+      .getData()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(
+        (data: Categories[]) => {
+          this.categories = data;
+        },
+        error => {
+          console.error(error);
+        }
+      );
   }
 
   trackByCategory(index: number, item: Categories): number {
