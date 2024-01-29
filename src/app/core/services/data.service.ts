@@ -3,12 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Categories } from 'src/app/shared/interfaces/categories';
+import { environment } from 'src/environment/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DataService {
-  url: string = 'http://localhost:3000';
+  url: string = environment.url;
 
   constructor(private http: HttpClient) {}
 
