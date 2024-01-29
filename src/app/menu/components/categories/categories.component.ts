@@ -1,22 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DataService } from 'src/app/core/services/data.service';
-import { Data } from 'src/app/core/services/data.service';
+import { Categories } from 'src/app/shared/interfaces/categories';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.component.html',
   styleUrls: ['./categories.component.css'],
 })
-export class CategoriesComponent implements OnInit {
-  categories: Data[] = [];
+export class CategoriesComponent implements OnInit, OnDestroy {
+  subscription: Subscription = new Subscription();
+  categories: Categories[] = [];
 
   constructor(private dataService: DataService) {}
 
   ngOnInit(): void {
-    this.dataService.getData().subscribe(
-      (data: Data[]) => {
+    this.subscription = this.dataService.getData().subscribe(
+      (data: Categories[]) => {
         this.categories = data;
-        console.log(this.categories);
         this.categories.forEach(category => console.log(category.name));
       },
       error => {
@@ -24,7 +25,12 @@ export class CategoriesComponent implements OnInit {
       }
     );
   }
-  trackByCategory(index: number, item: Data): number {
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+  trackByCategory(index: number, item: Categories): number {
     return item.id;
   }
 }
