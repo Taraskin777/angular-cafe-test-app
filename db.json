@@ -27,6 +27,20 @@
           "price":29.99
         }
       ]
+    },
+    {
+      "id": 3,
+      "name": "Sweets",
+      "image": "https://www.sweets4me.co.uk/cdn/shop/collections/traditionalloose.jpg?v=1634895788",
+      "dishes": [
+        {
+          "id": 1,
+          "name": "Ice Cream",
+          "image": "",
+          "description": "",
+          "price":29.99
+        }
+      ]
     }
 
   ]
