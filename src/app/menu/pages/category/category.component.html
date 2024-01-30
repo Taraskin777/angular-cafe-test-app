@@ -8,7 +8,9 @@
         <img [src]="dish.image" [alt]="dish.name" />
         <p>{{ dish.name }}</p>
         <p>Price: {{ dish.price }} $</p>
-        <button mat-raised-button class="details_btn" (click)="openDialog()">Details</button>
+        <button mat-raised-button class="details_btn" (click)="openDialog()">
+          Details
+        </button>
       </li>
     </ul>
   </ng-container>
