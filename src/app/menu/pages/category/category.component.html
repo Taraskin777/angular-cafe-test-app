@@ -1,2 +1,15 @@
-<p>category works!</p>
 <a routerLink="/">All categories</a>
+<main>
+  <ng-container *ngIf="dishes$ | async as dishes; else noDishes">
+    <ul *ngIf="dishes.length > 0">
+      <li *ngFor="let dish of dishes; trackBy: trackByDishes">
+        <img [src]="dish.image" [alt]="dish.name" />
+        <p>{{ dish.name }}</p>
+        <p>{{dish.price}}</p>
+      </li>
+    </ul>
+  </ng-container>
+  <ng-template #noDishes>
+    <h2>No Dishes!</h2>
+  </ng-template>
+</main>
