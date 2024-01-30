@@ -1,9 +1,11 @@
 <main>
-  <ng-container *ngIf="(categories$ | async) as categories; else noCategories">
+  <ng-container *ngIf="categories$ | async as categories; else noCategories">
     <ul *ngIf="categories.length > 0">
       <li *ngFor="let category of categories; trackBy: trackByCategory">
-        <img [src]="category.image" [alt]="category.name" />
-        <p>{{ category.name }}</p>
+        <a routerLink="category">
+          <img [src]="category.image" [alt]="category.name" />
+          <p>{{ category.name }}</p>
+        </a>
       </li>
     </ul>
   </ng-container>
@@ -11,4 +13,3 @@
     <h2>No Categories!</h2>
   </ng-template>
 </main>
-
