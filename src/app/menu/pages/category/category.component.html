@@ -1,15 +1,18 @@
-<a routerLink="/">All categories</a>
+<button mat-raised-button>
+  <a routerLink="/" class="back_to_all">Back to All categories</a>
+</button>
 <main>
   <ng-container *ngIf="dishes$ | async as dishes; else noDishes">
     <ul *ngIf="dishes.length > 0">
       <li *ngFor="let dish of dishes; trackBy: trackByDishes">
         <img [src]="dish.image" [alt]="dish.name" />
         <p>{{ dish.name }}</p>
-        <p>{{dish.price}}</p>
+        <p>Price: {{ dish.price }} $</p>
+        <button mat-raised-button class="details_btn">Details</button>
       </li>
     </ul>
   </ng-container>
   <ng-template #noDishes>
-    <h2>No Dishes!</h2>
+    <h2>Loading...</h2>
   </ng-template>
 </main>

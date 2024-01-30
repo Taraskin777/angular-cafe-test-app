@@ -36,5 +36,18 @@ p {
 
 a {
   text-decoration: none;
-  text-align:center
+  text-align:center;
+}
+
+.back_to_all {
+   display: block;
+   color: black;
+}
+
+.back_to_all:hover{
+   color: blue;
+}
+
+.details_btn {
+   margin:15px;
 }

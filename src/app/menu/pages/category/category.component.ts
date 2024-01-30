@@ -19,9 +19,7 @@ export class CategoryComponent implements OnInit {
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    console.log(id);
     this.dishes$ = this.dataService.getDishesFromCategory(id);
-    console.log(this.dishes$);
   }
 
   trackByDishes(index: number, item: Dishes): number {

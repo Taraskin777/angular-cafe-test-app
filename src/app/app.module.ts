@@ -8,9 +8,10 @@ import { StoreModule } from '@ngrx/store';
 import { CoreModule } from './core/core.module';
 import { MenuModule } from './menu/menu.module';
 import { HttpClientModule } from '@angular/common/http';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, PageNotFoundComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
