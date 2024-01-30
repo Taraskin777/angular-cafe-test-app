@@ -25,10 +25,10 @@ export class CategoryComponent implements OnInit {
     this.dishes$ = this.dataService.getDishesFromCategory(id);
   }
 
-  openDialog(): void {
+  openDialog(dish: Dishes): void {
     this.dialog.open(ModalComponent, {
       data: {
-        name: 'Taras',
+        description: dish.description,
       },
     });
   }

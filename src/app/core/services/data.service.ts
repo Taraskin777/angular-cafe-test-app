@@ -35,26 +35,4 @@ export class DataService {
       })
     );
   }
-
-  public getDescriptionFromDish(
-    categoryId: number,
-    dishId: number
-  ): Observable<string> {
-    return this.getDishesFromCategory(categoryId).pipe(
-      map(dishes => {
-        const dish = dishes.find(d => d.id === dishId);
-        if (dish) {
-          return dish.description;
-        } else {
-          throw new Error(
-            `Dish with id ${dishId} not found in category with id ${categoryId}`
-          );
-        }
-      }),
-      catchError(error => {
-        console.error('Error fetching dish description:', error);
-        return throwError(() => new Error('test'));
-      })
-    );
-  }
 }

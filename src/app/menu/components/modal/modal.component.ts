@@ -2,12 +2,10 @@ import { Component, Inject } from '@angular/core';
 import {
   MatDialog,
   MAT_DIALOG_DATA,
-  MatDialogTitle,
-  MatDialogContent,
 } from '@angular/material/dialog';
 
 interface DialogData {
-  name: string;
+  description: string;
 }
 
 @Component({
@@ -16,13 +14,13 @@ interface DialogData {
   styleUrls: ['./modal.component.css'],
 })
 export class ModalComponent {
-  firstName: string;
+  description: string;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     public dialog: MatDialog
   ) {
-    this.firstName = data.name;
+    this.description = data.description;
   }
 
   closeDialog(): void {
