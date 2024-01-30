@@ -17,7 +17,7 @@ export class CategoryComponent implements OnInit {
   constructor(
     private dataService: DataService,
     private route: ActivatedRoute,
-    private dialog: MatDialog
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -25,8 +25,12 @@ export class CategoryComponent implements OnInit {
     this.dishes$ = this.dataService.getDishesFromCategory(id);
   }
 
-  openDialog(): void { 
-    this.dialog.open(ModalComponent);
+  openDialog(): void {
+    this.dialog.open(ModalComponent, {
+      data: {
+        name: 'Taras',
+      },
+    });
   }
 
   trackByDishes(index: number, item: Dishes): number {

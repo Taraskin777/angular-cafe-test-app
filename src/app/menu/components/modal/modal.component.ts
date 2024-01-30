@@ -6,8 +6,8 @@ import {
   MatDialogContent,
 } from '@angular/material/dialog';
 
-export interface DialogData {
-  animal: 'panda' | 'unicorn' | 'lion';
+interface DialogData {
+  name: string;
 }
 
 @Component({
@@ -16,23 +16,16 @@ export interface DialogData {
   styleUrls: ['./modal.component.css'],
 })
 export class ModalComponent {
-  constructor(public dialog: MatDialog) { }
-  
-  // openDialog() {
-  //   this.dialog.open(DialogDataExampleDialog, {
-  //     data: {
-  //       animal: 'panda',
-  //     },
-  //   });
-  // }
-}
+  firstName: string;
 
-// @Component({
-//   selector: 'dialog-data-example-dialog',
-//   templateUrl: 'dialog-data-example-dialog.html',
-//   standalone: true,
-//   imports: [MatDialogTitle, MatDialogContent],
-// })
-// export class DialogDataExampleDialog {
-//   constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData) {}
-// }
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    public dialog: MatDialog
+  ) {
+    this.firstName = data.name;
+  }
+
+  closeDialog(): void {
+    this.dialog.closeAll();
+  }
+}
