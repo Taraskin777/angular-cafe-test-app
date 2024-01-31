@@ -22,7 +22,7 @@ export class CategoryComponent implements OnInit {
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.dishes$ = this.dataService.getDishesFromCategory(id);
+    // this.dishes$ = this.dataService.getDishesFromCategory(id);
   }
 
   openDialog(dish: Dishes): void {
