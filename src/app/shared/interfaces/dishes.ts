@@ -1,6 +1,6 @@
 export interface Dishes {
   id: number;
-  category: string;
+  categoryId: number;
   name: string;
   image: string;
   description: string;

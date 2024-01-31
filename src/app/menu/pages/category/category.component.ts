@@ -21,12 +21,8 @@ export class CategoryComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const category = this.route.snapshot.paramMap.get('name');
-    if (category) {
-      this.dishes$ = this.dataService.getDishesFromCategory(category);
-    } else {
-      console.log('No category');
-    }
+    const category = Number(this.route.snapshot.paramMap.get('categoryId'));
+    this.dishes$ = this.dataService.getDishesFromCategory(category);
   }
 
   openDialog(dish: Dishes): void {

@@ -23,9 +23,9 @@ export class DataService {
     );
   }
 
-  public getDishesFromCategory(category: string): Observable<Dishes[]> {
+  public getDishesFromCategory(category: number): Observable<Dishes[]> {
     return this.http
-      .get<Dishes[]>(`${this.url}/dishes?category=${category}`)
+      .get<Dishes[]>(`${this.url}/dishes?categoryId=${category}`)
       .pipe(
         catchError(error => {
           console.error(

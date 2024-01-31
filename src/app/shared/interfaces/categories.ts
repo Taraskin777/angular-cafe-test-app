@@ -1,5 +1,3 @@
-import { Dishes } from './dishes';
-
 export interface Categories {
   id: number;
   name: string;

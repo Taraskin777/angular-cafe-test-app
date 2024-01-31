@@ -60,7 +60,7 @@
     {
       "id": 6,
       "name": 2,
-      "categoryId": "Main Courses",
+      "categoryId": 2,
       "image": "https://images.immediate.co.uk/production/volatile/sites/2/2022/11/Roast-pork-shoulder-with-cinnamon-and-clementines-4cd22bd.jpg?quality=90&webp=true&resize=800,533",
       "description": "Serve this fall-apart roast pork shoulder with tortillas, sour cream and lime and let everyone dig in.",
       "price": 19.99
