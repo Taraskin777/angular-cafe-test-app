@@ -1,0 +1,19 @@
+.modal {
+   height: fit-content;
+   width: 250px;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   align-items: center;
+   text-align: center;
+   padding: 10px;
+   gap: 20px;
+}
+
+p {
+   margin-bottom: 40px;
+}
+
+.modal_btn {
+   width: 150px;
+}

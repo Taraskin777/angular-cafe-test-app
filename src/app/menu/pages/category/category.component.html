@@ -8,11 +8,13 @@
         <img [src]="dish.image" [alt]="dish.name" />
         <p>{{ dish.name }}</p>
         <p>Price: {{ dish.price }} $</p>
-        <button mat-raised-button class="details_btn">Details</button>
+        <button mat-raised-button class="details_btn" (click)="openDialog(dish)">
+          Details
+        </button>
       </li>
     </ul>
   </ng-container>
   <ng-template #noDishes>
-    <h2>Loading...</h2>
+    <h2>No dishes</h2>
   </ng-template>
 </main>
