@@ -3,73 +3,75 @@
     {
       "id": 1,
       "name": "Side Dishes",
-      "image": "https://www.savoringthegood.com/wp-content/uploads/2022/12/Side-Dishes-For-Chicken..jpg",
-      "dishes": [
-        {
-          "id": 1,
-          "name": "Roasted Vegetables",
-          "image": "https://www.wellplated.com/wp-content/uploads/2021/12/What-to-do-with-roasted-vegetables.jpg",
-          "description": "Beets, Sweet Potatoes, Potatoes, Carrots, Parsnips",
-          "price": 19.99
-        },
-        {
-          "id": 2,
-          "name": "Pearl Couscous Salad",
-          "image": "https://thegreenloot.com/wp-content/uploads/2018/08/vegan-israeli-couscous-salad-7.jpg",
-          "description": "Juicy tomatoes, crisp cucumbers, kalamata olives, and fresh basil for herbal brightness pair perfectly in this light, refreshing side dish.",
-          "price": 15.99
-        },
-        {
-          "id": 3,
-          "name": "Vegan Sauteed Mushrooms",
-          "image": "https://thegreenloot.com/wp-content/uploads/2018/02/vegan-side-dish-recipes-40.jpg",
-          "description": "Fact — a caramelized mushroom is a tasty mushroom. This is the easiest side dish in the world and all you need are some mushrooms and a little bit of time.",
-          "price": 9.99
-        }
-      ]
+      "image": "https://www.savoringthegood.com/wp-content/uploads/2022/12/Side-Dishes-For-Chicken..jpg"
     },
     {
       "id": 2,
       "name": "Main Courses",
-      "image": "https://frenchly.us/wp-content/uploads/sites/9/2017/08/shutterstock_90307252.jpg.webp",
-      "dishes": [
-        {
-          "id": 1,
-          "name": "Fried chicken",
-          "image": "https://images.immediate.co.uk/production/volatile/sites/2/2019/10/134_Roma_9780451497017_art_r1-facac84.jpg?quality=90&webp=true&resize=975,649",
-          "description": "Jammy lemons and plump roasted dates are cooked with this chicken for a sweet and easy alternative to a whole roast bird.",
-          "price":29.99
-        },
-        {
-          "id": 2,
-          "name": "Hot-smoked salmon vol-au-vents",
-          "image": "https://images.immediate.co.uk/production/volatile/sites/2/2021/08/OLI_0921_FREEZER-ENTERTAINING-3-10-THINGS-INSPIRATION-ROSIE-PHOTOGRAPHY-HAYLEY-BENOIT-LONDON-JULY-2021-TIFF-FULL-SIZE-7--fd675f5.jpg?quality=90&webp=true&resize=975,649",
-          "description": "A brilliant main for a special occasion – make these hot-smoked salmon vol au vents ahead of time, then reheat and assemble to serve.",
-          "price":25.99
-        },
-        {
-          "id": 3,
-          "name": "Roast pork shoulder with cinnamon and clementines",
-          "image": "https://images.immediate.co.uk/production/volatile/sites/2/2022/11/Roast-pork-shoulder-with-cinnamon-and-clementines-4cd22bd.jpg?quality=90&webp=true&resize=800,533",
-          "description": "Serve this fall-apart roast pork shoulder with tortillas, sour cream and lime and let everyone dig in.",
-          "price":19.99
-        }
-      ]
+      "image": "https://frenchly.us/wp-content/uploads/sites/9/2017/08/shutterstock_90307252.jpg.webp"
     },
     {
       "id": 3,
       "name": "Sweets",
-      "image": "https://www.sweets4me.co.uk/cdn/shop/collections/traditionalloose.jpg?v=1634895788",
-      "dishes": [
-        {
-          "id": 1,
-          "name": "Ice Cream",
-          "image": "https://www.washingtonpost.com/resizer/qYpYDV1BjKI3ZimLblCjjFXhc2k=/arc-anglerfish-washpost-prod-washpost/public/KUFWIPXROII6ZLAWR67XDFGNPA.jpg",
-          "description": "Ice cream is a mixture of milk, cream, sugar, and sometimes other ingredients that has been frozen into a soft, creamy delight using special techniques. Ice cream has been a popular treat for hundreds of years but has only become commonplace since the widespread use of refrigeration. The exploding popularity of ice cream has led to a number of ice cream variations including frozen custard, frozen yogurt, and even non-dairy versions made with ingredients like coconut milk.",
-          "price":29.99
-        }
-      ]
+      "image": "https://www.sweets4me.co.uk/cdn/shop/collections/traditionalloose.jpg?v=1634895788"
     }
-
+  ],
+  "dishes": [
+    {
+      "id": 1,
+      "categoryId": 1,
+      "name": "Roasted Vegetables",
+      "image": "https://www.wellplated.com/wp-content/uploads/2021/12/What-to-do-with-roasted-vegetables.jpg",
+      "description": "Beets, Sweet Potatoes, Potatoes, Carrots, Parsnips",
+      "price": 19.99
+    },
+    {
+      "id": 2,
+      "categoryId": 1,
+      "name": "Pearl Couscous Salad",
+      "image": "https://thegreenloot.com/wp-content/uploads/2018/08/vegan-israeli-couscous-salad-7.jpg",
+      "description": "Juicy tomatoes, crisp cucumbers, kalamata olives, and fresh basil for herbal brightness pair perfectly in this light, refreshing side dish.",
+      "price": 15.99
+    },
+    {
+      "id": 3,
+      "categoryId": 1,
+      "name": "Vegan Sauteed Mushrooms",
+      "image": "https://thegreenloot.com/wp-content/uploads/2018/02/vegan-side-dish-recipes-40.jpg",
+      "description": "Fact — a caramelized mushroom is a tasty mushroom. This is the easiest side dish in the world and all you need are some mushrooms and a little bit of time.",
+      "price": 9.99
+    },
+    {
+      "id": 4,
+      "name": "Fried chicken",
+      "categoryId": 2,
+      "image": "https://images.immediate.co.uk/production/volatile/sites/2/2019/10/134_Roma_9780451497017_art_r1-facac84.jpg?quality=90&webp=true&resize=975,649",
+      "description": "Jammy lemons and plump roasted dates are cooked with this chicken for a sweet and easy alternative to a whole roast bird.",
+      "price": 29.99
+    },
+    {
+      "id": 5,
+      "name": "Hot-smoked salmon vol-au-vents",
+      "categoryId": 2,
+      "image": "https://images.immediate.co.uk/production/volatile/sites/2/2021/08/OLI_0921_FREEZER-ENTERTAINING-3-10-THINGS-INSPIRATION-ROSIE-PHOTOGRAPHY-HAYLEY-BENOIT-LONDON-JULY-2021-TIFF-FULL-SIZE-7--fd675f5.jpg?quality=90&webp=true&resize=975,649",
+      "description": "A brilliant main for a special occasion – make these hot-smoked salmon vol au vents ahead of time, then reheat and assemble to serve.",
+      "price": 25.99
+    },
+    {
+      "id": 6,
+      "name": 2,
+      "categoryId": 2,
+      "image": "https://images.immediate.co.uk/production/volatile/sites/2/2022/11/Roast-pork-shoulder-with-cinnamon-and-clementines-4cd22bd.jpg?quality=90&webp=true&resize=800,533",
+      "description": "Serve this fall-apart roast pork shoulder with tortillas, sour cream and lime and let everyone dig in.",
+      "price": 19.99
+    },
+    {
+      "id": 7,
+      "name": "Ice Cream",
+      "categoryId": 3,
+      "image": "https://www.washingtonpost.com/resizer/qYpYDV1BjKI3ZimLblCjjFXhc2k=/arc-anglerfish-washpost-prod-washpost/public/KUFWIPXROII6ZLAWR67XDFGNPA.jpg",
+      "description": "Ice cream is a mixture of milk, cream, sugar, and sometimes other ingredients that has been frozen into a soft, creamy delight using special techniques. Ice cream has been a popular treat for hundreds of years but has only become commonplace since the widespread use of refrigeration. The exploding popularity of ice cream has led to a number of ice cream variations including frozen custard, frozen yogurt, and even non-dairy versions made with ingredients like coconut milk.",
+      "price": 29.99
+    }
   ]
 }
