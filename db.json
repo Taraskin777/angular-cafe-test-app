@@ -78,7 +78,7 @@
     {
       "id": 1,
       "login": "Taras",
-      "password": 12345,
+      "password": "12345",
       "role": "admin"
     }
   ]
