@@ -44,7 +44,7 @@
     {
       "id": 4,
       "name": "Fried chicken",
-      "categoryId": "Main Courses",
+      "categoryId": 2,
       "image": "https://images.immediate.co.uk/production/volatile/sites/2/2019/10/134_Roma_9780451497017_art_r1-facac84.jpg?quality=90&webp=true&resize=975,649",
       "description": "Jammy lemons and plump roasted dates are cooked with this chicken for a sweet and easy alternative to a whole roast bird.",
       "price": 29.99
