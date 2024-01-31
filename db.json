@@ -71,5 +71,15 @@
       ]
     }
 
+  ],
+  "users": [
+    {
+      "id": 1,
+      "role": "admin",
+      "login": "Taras",
+      "password": "12345"
+    }
   ]
+
+  
 }
