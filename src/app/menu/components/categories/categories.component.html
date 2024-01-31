@@ -2,7 +2,7 @@
   <ng-container *ngIf="categories$ | async as categories; else noCategories">
     <ul *ngIf="categories.length > 0">
       <li *ngFor="let category of categories; trackBy: trackByCategory">
-        <a routerLink="/categories/{{category.id}}">
+        <a routerLink="/categories/{{category.name}}">
           <img [src]="category.image" [alt]="category.name" />
           <p>{{ category.name }}</p>
         </a>

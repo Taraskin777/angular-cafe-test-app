@@ -23,16 +23,17 @@ export class DataService {
     );
   }
 
-  // public getDishesFromCategory(id: number): Observable<Dishes[]> {
-  //   return this.http.get<Categories>(`${this.url}/categories/${id}`).pipe(
-  //     map((category: Categories) => category.dishes),
-  //     catchError(error => {
-  //       console.error(
-  //         `Error fetching dishes for category with id ${id}:`,
-  //         error
-  //       );
-  //       return throwError(() => new Error('test'));
-  //     })
-  //   );
-  // }
+  public getDishesFromCategory(category: string): Observable<Dishes[]> {
+    return this.http
+      .get<Dishes[]>(`${this.url}/dishes?category=${category}`)
+      .pipe(
+        catchError(error => {
+          console.error(
+            `Error fetching dishes for category with category ${category}:`,
+            error
+          );
+          return throwError(() => new Error('test'));
+        })
+      );
+  }
 }
