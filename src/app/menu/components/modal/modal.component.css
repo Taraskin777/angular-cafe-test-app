@@ -1,0 +1,12 @@
+.modal {
+   height: 300px;
+   width: 250px;
+   display: flex;
+   flex-direction: column;
+   text-align: center;
+   padding: 10px;
+}
+
+.modal_btn {
+   width: 150px;
+}

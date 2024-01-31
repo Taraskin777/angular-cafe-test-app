@@ -29,6 +29,7 @@ export class CategoryComponent implements OnInit {
     this.dialog.open(ModalComponent, {
       data: {
         description: dish.description,
+        name: dish.name
       },
     });
   }
