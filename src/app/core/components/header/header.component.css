@@ -2,6 +2,7 @@ h1 {
   text-align: center;
   color: blue;
   margin-bottom: 0;
+  cursor: pointer;
 }
 
 .login_box {
