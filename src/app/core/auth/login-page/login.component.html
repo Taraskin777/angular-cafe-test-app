@@ -1,15 +1,14 @@
 <main>
    <h3>Authorization</h3>
-   <form action="/login" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-      <div class="input">
-         <label for="login">Login</label>
-         <input id="login" type="text" formControlName="login">
+   <form action="/" [formGroup]="form" (ngSubmit)="login()">
+      <div class="form-field">
+         <label for="login">Email</label>
+         <input id="login" type="text" formControlName="email">
       </div>
-      <div class="input">
+      <div class="form-field">
          <label for="password">Password</label>
          <input type="password" name="password" formControlName="password">
       </div>
-      <p>Complete the form to enable button.</p>
-      <button type="submit" [disabled]="!profileForm.valid">Submit</button>
+      <button type="submit" (click)="login()">Submit</button>
    </form>
 </main>
