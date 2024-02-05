@@ -1,10 +1,5 @@
 import { Component } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  Validators,
-  FormBuilder,
-} from '@angular/forms';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
@@ -34,7 +29,12 @@ export class LoginComponent {
   login() {
     const val = this.form.value;
 
-    if (val.email === 'taras@gmail.com' && val.password === '123456') {
+    if (
+      val.email &&
+      val.email === 'taras@gmail.com' &&
+      val.password &&
+      val.password === '123456'
+    ) {
       this.authService.login(val.email, val.password).subscribe(() => {
         this.router.navigateByUrl('/');
       });
@@ -43,5 +43,4 @@ export class LoginComponent {
       this.isAdmin = 'You are not administrator!';
     }
   }
-
 }
