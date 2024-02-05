@@ -19,8 +19,14 @@ export class CategoriesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.checkAdminStatus();
     this.categories$ = this.dataService.getData();
     this.authorizedUser$ = this.authService.currentAuth$;
+  }
+
+  checkAdminStatus(): void {
+    const isAdmin = this.authService.isAdmin();
+    this.authService.changeAuth(isAdmin);
   }
 
   trackByCategory(index: number, item: Categories): number {

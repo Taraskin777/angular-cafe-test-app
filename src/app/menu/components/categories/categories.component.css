@@ -1,8 +1,13 @@
 main {
    height: 70vh;
    display: flex;
+   flex-direction: column;
    justify-content: center;
    align-items: center;
+}
+
+.categories_wrapper {
+  margin-bottom: 50px;
 }
 
 ul {
@@ -37,4 +42,10 @@ p {
 a {
   text-decoration: none;
   text-align:center
+}
+
+
+
+.new_cat_btn {
+
 }
