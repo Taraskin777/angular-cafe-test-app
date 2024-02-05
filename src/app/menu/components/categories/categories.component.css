@@ -7,7 +7,7 @@ main {
 }
 
 .categories_wrapper {
-  margin-bottom: 50px;
+  margin-bottom: 70px;
 }
 
 ul {
@@ -37,6 +37,7 @@ img {
 
 p {
   margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 a {
@@ -44,8 +45,7 @@ a {
   text-align:center
 }
 
-
-
-.new_cat_btn {
-
+.edit_del_btns {
+  display: flex;
+  justify-content: space-around;
 }
