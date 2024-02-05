@@ -20,7 +20,7 @@ export class CategoriesComponent implements OnInit {
 
   ngOnInit(): void {
     this.categories$ = this.dataService.getData();
-    this.authorizedUser$ = this.auth.currentAuth;
+    this.authorizedUser$ = this.auth.currentAuth$;
   }
 
   trackByCategory(index: number, item: Categories): number {

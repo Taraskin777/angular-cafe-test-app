@@ -19,12 +19,12 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkAdminStatus();
-    this.authorizedUser$ = this.auth.currentAuth;
+    this.authorizedUser$ = this.auth.currentAuth$;
   }
 
   checkAdminStatus(): void {
     const isAdmin = this.auth.isAdmin();
-    this.auth.changeAuth$(isAdmin);
+    this.auth.changeAuth(isAdmin);
   }
 
   logout(): void {

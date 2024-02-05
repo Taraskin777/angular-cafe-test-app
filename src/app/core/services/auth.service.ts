@@ -5,6 +5,7 @@ import { tap } from 'rxjs/operators';
 import { environment } from 'src/environment/environment';
 import { User } from 'src/app/shared/interfaces/user';
 import { BehaviorSubject } from 'rxjs';
+import { Observable } from 'rxjs';
 
 interface AuthResult {
   expiresIn: number;
@@ -17,17 +18,17 @@ interface AuthResult {
   providedIn: 'root',
 })
 export class AuthService {
-  authorization = new BehaviorSubject<boolean>(false);
+  private authorization = new BehaviorSubject<boolean>(false);
 
-  currentAuth = this.authorization.asObservable();
+  currentAuth$ = this.authorization.asObservable();
 
   constructor(private http: HttpClient) {}
 
-  changeAuth$(value: boolean): void {
+  changeAuth(value: boolean): void {
     this.authorization.next(value);
   }
 
-  login(email: string, password: string) {
+  login(email: string, password: string): Observable<User> {
     return this.http.get<User>(`${environment.url}/users/1`).pipe(
       tap((user: User) => {
         if (
@@ -44,13 +45,13 @@ export class AuthService {
             role: 'admin',
             token: user.token,
           });
-          this.changeAuth$(true);
+          this.changeAuth(true);
         }
       })
     );
   }
 
-  private setSession(authResult: AuthResult) {
+  private setSession(authResult: AuthResult): void {
     const expiresAt = moment().add(authResult.expiresIn, 'second');
 
     localStorage.setItem('id_token', authResult.idToken);
@@ -58,28 +59,28 @@ export class AuthService {
     localStorage.setItem('user_role', authResult.role);
   }
 
-  logout() {
+  logout(): void {
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
     localStorage.removeItem('user_role');
-    this.changeAuth$(false);
+    this.changeAuth(false);
   }
 
-  public isLoggedIn() {
+  isLoggedIn(): boolean {
     return moment().isBefore(this.getExpiration());
   }
 
-  isLoggedOut() {
+  isLoggedOut(): boolean {
     return !this.isLoggedIn();
   }
 
-  getExpiration() {
+  getExpiration(): moment.Moment | null {
     const expiration = localStorage.getItem('expires_at');
     const expiresAt = expiration ? moment(JSON.parse(expiration)) : null;
     return expiresAt;
   }
 
-  isAdmin() {
+  isAdmin(): boolean {
     const userRole = localStorage.getItem('user_role');
     return userRole === 'admin';
   }
