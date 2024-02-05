@@ -3,6 +3,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -11,14 +12,13 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 })
 export class LoginComponent {
   form: FormGroup;
-  isAdmin: string = '';
+  logMessage: string = '';
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private authService: AuthService,
     private destroyRef: DestroyRef
-    
   ) {
     this.form = this.fb.group({
       email: this.fb.control('', [Validators.required, Validators.email]),
@@ -40,13 +40,13 @@ export class LoginComponent {
     ) {
       this.authService
         .login(val.email, val.password)
-        .pipe(takeUntilDestroyed(this.destroyRef))
+        .pipe(take(1))
         .subscribe(() => {
           this.router.navigateByUrl('/');
         });
     } else {
       this.authService.logout();
-      this.isAdmin = 'Wrong email or password';
+      this.logMessage = 'Wrong email or password';
     }
   }
 }
