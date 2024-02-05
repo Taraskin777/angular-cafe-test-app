@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, DestroyRef } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,9 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private destroyRef: DestroyRef
+    
   ) {
     this.form = this.fb.group({
       email: this.fb.control('', [Validators.required, Validators.email]),
@@ -35,12 +38,15 @@ export class LoginComponent {
       val.password &&
       val.password === '123456'
     ) {
-      this.authService.login(val.email, val.password).subscribe(() => {
-        this.router.navigateByUrl('/');
-      });
+      this.authService
+        .login(val.email, val.password)
+        .pipe(takeUntilDestroyed(this.destroyRef))
+        .subscribe(() => {
+          this.router.navigateByUrl('/');
+        });
     } else {
       this.authService.logout();
-      this.isAdmin = 'You are not administrator!';
+      this.isAdmin = 'Wrong email or password';
     }
   }
 }

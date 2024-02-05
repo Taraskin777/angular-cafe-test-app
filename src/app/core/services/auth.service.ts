@@ -38,10 +38,6 @@ export class AuthService {
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
     localStorage.setItem('user_role', authResult.role);
-
-    if (authResult.role === 'admin') {
-      console.log('You are logged in as an admin.');
-    }
   }
 
   logout() {

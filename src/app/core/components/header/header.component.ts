@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DoCheck } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 
@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements DoCheck {
   isAuthorized: boolean = false;
 
   constructor(
@@ -23,9 +23,8 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {
+  ngDoCheck(): void {
     this.checkAdmin();
-    console.log(this.isAuthorized);
   }
 
   logout(): void {
