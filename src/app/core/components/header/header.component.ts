@@ -8,8 +8,7 @@ import { Observable } from 'rxjs';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
 })
-export class HeaderComponent implements DoCheck, OnInit {
-  // isAuthorized: boolean = false;
+export class HeaderComponent implements OnInit {
   authorizedUser$: Observable<boolean> | undefined;
 
   constructor(
@@ -18,20 +17,14 @@ export class HeaderComponent implements DoCheck, OnInit {
     private auth: AuthService
   ) {}
 
-  // checkAdmin(): void {
-  //   if (this.authService.isAdmin()) {
-  //     this.isAuthorized = true;
-  //   } else {
-  //     this.isAuthorized = false;
-  //   }
-  // }
-
   ngOnInit(): void {
+    this.checkAdminStatus();
     this.authorizedUser$ = this.auth.currentAuth;
   }
 
-  ngDoCheck(): void {
-    // this.checkAdmin();
+  checkAdminStatus(): void {
+    const isAdmin = this.auth.isAdmin();
+    this.auth.changeAuth$(isAdmin);
   }
 
   logout(): void {
