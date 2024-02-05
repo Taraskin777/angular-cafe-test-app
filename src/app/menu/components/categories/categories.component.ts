@@ -15,12 +15,12 @@ export class CategoriesComponent implements OnInit {
 
   constructor(
     private dataService: DataService,
-    private auth: AuthService
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
     this.categories$ = this.dataService.getData();
-    this.authorizedUser$ = this.auth.currentAuth$;
+    this.authorizedUser$ = this.authService.currentAuth$;
   }
 
   trackByCategory(index: number, item: Categories): number {
