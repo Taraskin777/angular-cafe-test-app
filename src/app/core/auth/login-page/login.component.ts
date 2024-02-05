@@ -2,7 +2,6 @@ import { Component, DestroyRef } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { take } from 'rxjs';
 
 @Component({
@@ -18,7 +17,6 @@ export class LoginComponent {
     private fb: FormBuilder,
     private router: Router,
     private authService: AuthService,
-    private destroyRef: DestroyRef
   ) {
     this.form = this.fb.group({
       email: this.fb.control('', [Validators.required, Validators.email]),
