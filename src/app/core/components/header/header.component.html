@@ -1,10 +1,19 @@
 <header>
   <h1 routerLink="/">Fake Cafe!</h1>
-  <a routerLink="/login">
-    <button mat-raised-button class="login_box" >
-      <mat-icon fontIcon="login" class="login"></mat-icon>
-      <p>Log in</p>
-    </button>
-  </a>
+  <div class="btn_wrapper">
+    <a routerLink="/login">
+      <button mat-raised-button class="log_btn" >
+        <mat-icon fontIcon="login" class="login"></mat-icon>
+        <p>Log in</p>
+      </button>
+    </a>
+    <a routerLink="/">
+      <button mat-raised-button class="log_btn" (click)="logout()">
+        <mat-icon fontIcon="logout" class="logout"></mat-icon>
+        <p>Log out</p>
+      </button>
+    </a>
+  </div>
+
   <hr />
 </header>

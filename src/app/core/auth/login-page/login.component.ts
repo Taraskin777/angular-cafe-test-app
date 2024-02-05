@@ -15,6 +15,7 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LoginComponent {
   form: FormGroup;
+  isAdmin: string = '';
 
   constructor(
     private fb: FormBuilder,
@@ -33,11 +34,14 @@ export class LoginComponent {
   login() {
     const val = this.form.value;
 
-    if (val.email && val.password) {
+    if (val.email === 'taras@gmail.com' && val.password === '123456') {
       this.authService.login(val.email, val.password).subscribe(() => {
-        console.log('User is logged in');
         this.router.navigateByUrl('/');
       });
+    } else {
+      this.authService.logout();
+      this.isAdmin = 'You are not administrator!';
     }
   }
+
 }

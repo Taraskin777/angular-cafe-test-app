@@ -5,20 +5,25 @@ h1 {
   cursor: pointer;
 }
 
-.login_box {
+.btn_wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.log_btn {
   display: inline-flex;
   align-items: center;
   cursor: pointer;
   transition: all 0.3s;
-  margin: 0px 0px 10px 20px;
-  width: 100px;
+  margin:10px 20px;
+  width: 130px;
 }
 
-.login_box:hover {
+.log_btn:hover {
   color: blue;
   transition: all 0.3s;
 }
 
-.login {
-  width: 30px;
-}
+
+
+

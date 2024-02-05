@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import * as moment from 'moment';
 import { tap } from 'rxjs/operators';
 import { environment } from 'src/environment/environment';
+import { User } from 'src/app/shared/interfaces/user';
 
 interface AuthResult {
   expiresIn: number;
@@ -19,13 +20,14 @@ export class AuthService {
 
   login(email: string, password: string) {
     return this.http
-      .post<AuthResult>(`${environment.url}/users/1`, { email, password })
+      .get<User>(`${environment.url}/users/1`)
       .pipe(
-        tap((res: AuthResult) => {
-          if (res && res.role === 'admin') {
+        tap((user: User) => {
+          if (user && user.id === "1" && user.email === email && user.password === password) {
             localStorage.setItem('user_role', 'admin');
+            localStorage.setItem('id_token', user.token); 
+            this.setSession({ expiresIn: 3600, idToken: user.token, role: 'admin', token: user.token });
           }
-          this.setSession(res);
         })
       );
   }
