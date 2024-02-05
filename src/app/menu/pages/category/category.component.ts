@@ -26,7 +26,7 @@ export class CategoryComponent implements OnInit {
   ngOnInit(): void {
     const category = Number(this.route.snapshot.paramMap.get('categoryId'));
     this.dishes$ = this.dataService.getDishesFromCategory(category);
-    this.checkAdminStatus();
+    this.authService.checkAdminStatus();
     this.authorizedUser$ = this.authService.currentAuth$;
   }
 
@@ -37,11 +37,6 @@ export class CategoryComponent implements OnInit {
         name: dish.name,
       },
     });
-  }
-
-  checkAdminStatus(): void {
-    const isAdmin = this.authService.isAdmin();
-    this.authService.changeAuth(isAdmin);
   }
 
   trackByDishes(index: number, item: Dishes): number {

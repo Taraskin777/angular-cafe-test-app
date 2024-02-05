@@ -84,4 +84,9 @@ export class AuthService {
     const userRole = localStorage.getItem('user_role');
     return userRole === 'admin';
   }
+
+  checkAdminStatus(): void {
+    const isAdmin = this.isAdmin();
+    this.changeAuth(isAdmin);
+  }
 }
