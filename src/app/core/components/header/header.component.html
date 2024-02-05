@@ -1,8 +1,22 @@
 <header>
-  <h1>Fake Cafe!</h1>
-  <button mat-raised-button class="login_box">
-    <mat-icon fontIcon="login" class="login"></mat-icon>
-    <p>Log in</p>
-  </button>
+  <h1 routerLink="/">Fake Cafe!</h1>
+  <div class="btn_wrapper">
+    <ng-container *ngIf="authorizedUser$ | async; else loggedIn">
+      <a routerLink="/">
+        <button mat-raised-button class="log_btn" (click)="logout()">
+          <mat-icon fontIcon="logout" class="logout"></mat-icon>
+          <p>Log out</p>
+        </button>
+      </a>
+    </ng-container>
+    <ng-template #loggedIn>
+      <a routerLink="/login">
+        <button mat-raised-button class="log_btn">
+          <mat-icon fontIcon="login" class="login"></mat-icon>
+          <p>Log in</p>
+        </button>
+      </a>
+    </ng-template>
+  </div>
   <hr />
 </header>

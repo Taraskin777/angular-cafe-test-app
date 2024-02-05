@@ -1,0 +1,15 @@
+<main>
+   <h3>Authorization</h3>
+   <form action="/" [formGroup]="form" (ngSubmit)="login()">
+      <div class="form-field">
+         <label for="login">Email</label>
+         <input id="login" type="text" formControlName="email">
+      </div>
+      <div class="form-field">
+         <label for="password">Password</label>
+         <input type="password" name="password" formControlName="password">
+      </div>
+      <button type="submit">Submit</button>
+   </form>
+    <div><p>{{logMessage}}</p></div>
+</main>
