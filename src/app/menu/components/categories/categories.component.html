@@ -7,7 +7,7 @@
             <img [src]="category.image" [alt]="category.name" />
             <p>{{ category.name }}</p>
             <div class="edit_del_btns" *ngIf="authorizedUser$ | async">
-              <button mat-raised-button>Delete</button>
+              <button mat-raised-button (click)="deleteCategory(category)">Delete</button>
               <button mat-raised-button>Edit</button>
             </div>
           </a>

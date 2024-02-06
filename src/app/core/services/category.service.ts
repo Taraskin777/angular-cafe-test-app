@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, catchError, throwError } from 'rxjs';
 import { Categories } from 'src/app/shared/interfaces/categories';
 import { environment } from 'src/environment/environment';
+import { switchMap, forkJoin } from 'rxjs';
+import { Dishes } from 'src/app/shared/interfaces/dishes';
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +25,57 @@ export class CategoryService {
       );
   }
 
-  public removeCategory() {}
+  public removeCategory(categoryId: string): Observable<void> {
+    // return this.http.delete<void>(`${this.url}/categories/${categoryId}`).pipe(
+    //   switchMap(() => {
+    //     console.log('Switch');
+    //     return this.http.delete<void>(
+    //       `${this.url}/dishes?categoryId=${categoryId}`
+    //     );
+    //   }),
+    //   catchError(error => {
+    //     console.error('Error remove category and related dishes:', error);
+    //     return throwError(() => new Error('Error'));
+    //   })
+    // );
+
+    return this.http.get<Dishes[]>(`${this.url}/dishes`).pipe(
+      switchMap((dishes: Dishes[]) => {
+        const filteredDishes = dishes.filter(
+          dish => dish.categoryId === categoryId
+        );
+        const deleteCategory$ = this.http.delete<void>(
+          `${this.url}/categories/${categoryId}`
+        );
+        const deleteDishes$ = this.deleteDishes(filteredDishes);
+        return forkJoin([deleteCategory$, deleteDishes$]).pipe(
+          switchMap(() => {
+            return new Observable<void>(observer => {
+              observer.next();
+              observer.complete();
+            });
+          }),
+          catchError(error => {
+            console.error('Error removing category and related dishes:', error);
+            return throwError(() => new Error('Error'));
+          })
+        );
+      }),
+      catchError(error => {
+        console.error('Error fetching dishes:', error);
+        return throwError(() => new Error('Error'));
+      })
+    );
+  }
+
+  private deleteDishes(dishes: Dishes[]): Observable<void[]> {
+    const deleteRequests: Observable<void>[] = [];
+    dishes.forEach(dish => {
+      const request = this.http.delete<void>(`${this.url}/dishes/${dish.id}`);
+      deleteRequests.push(request);
+    });
+    return forkJoin(deleteRequests);
+  }
 
   public editCategory() {}
 }

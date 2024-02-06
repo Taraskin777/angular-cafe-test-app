@@ -32,7 +32,7 @@ export class AddCatModalComponent {
     this.dialog.closeAll();
   }
 
-  onSubmit() {
+  onSubmit(): void {
     if (this.form.valid) {
       const newCategory: Categories = {
         id: uuidv4(),
