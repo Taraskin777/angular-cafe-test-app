@@ -1,15 +1,25 @@
 <main>
-  <ng-container *ngIf="categories$ | async as categories; else noCategories">
-    <ul *ngIf="categories.length > 0">
-      <li *ngFor="let category of categories; trackBy: trackByCategory">
-        <a routerLink="/categories/{{category.id}}">
-          <img [src]="category.image" [alt]="category.name" />
-          <p>{{ category.name }}</p>
-        </a>
-      </li>
-    </ul>
+  <div class="categories_wrapper">
+    <ng-container *ngIf="categories$ | async as categories; else noCategories" class="categories_wrapper">
+      <ul *ngIf="categories.length > 0">
+        <li *ngFor="let category of categories; trackBy: trackByCategory">
+          <a routerLink="/categories/{{category.id}}">
+            <img [src]="category.image" [alt]="category.name" />
+            <p>{{ category.name }}</p>
+            <div class="edit_del_btns" *ngIf="authorizedUser$ | async">
+              <button mat-raised-button>Delete</button>
+              <button mat-raised-button>Edit</button>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </ng-container>
+    <ng-template #noCategories>
+      <h2>No categories</h2>
+    </ng-template>
+  </div>
+
+  <ng-container *ngIf="authorizedUser$ | async">
+     <button mat-raised-button class="new_cat_btn">Add New Category</button>
   </ng-container>
-  <ng-template #noCategories>
-    <h2>No categories</h2>
-  </ng-template>
 </main>

@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../../components/modal/modal.component';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-category',
@@ -13,16 +14,20 @@ import { ModalComponent } from '../../components/modal/modal.component';
 })
 export class CategoryComponent implements OnInit {
   dishes$: Observable<Dishes[]> | undefined;
+  authorizedUser$: Observable<boolean> | undefined;
 
   constructor(
     private dataService: DataService,
     private route: ActivatedRoute,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
     const category = Number(this.route.snapshot.paramMap.get('categoryId'));
     this.dishes$ = this.dataService.getDishesFromCategory(category);
+    this.authService.checkAdminStatus();
+    this.authorizedUser$ = this.authService.currentAuth$;
   }
 
   openDialog(dish: Dishes): void {

@@ -1,8 +1,13 @@
 main {
    height: 70vh;
    display: flex;
+   flex-direction: column;
    justify-content: center;
    align-items: center;
+}
+
+.categories_wrapper {
+  margin-bottom: 70px;
 }
 
 ul {
@@ -32,9 +37,15 @@ img {
 
 p {
   margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 a {
   text-decoration: none;
   text-align:center
+}
+
+.edit_del_btns {
+  display: flex;
+  justify-content: space-around;
 }

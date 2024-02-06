@@ -13,18 +13,12 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private router: Router,
-    private auth: AuthService
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.checkAdminStatus();
-    this.authorizedUser$ = this.auth.currentAuth$;
-  }
-
-  checkAdminStatus(): void {
-    const isAdmin = this.auth.isAdmin();
-    this.auth.changeAuth(isAdmin);
+    this.authService.checkAdminStatus();
+    this.authorizedUser$ = this.authService.currentAuth$;
   }
 
   logout(): void {

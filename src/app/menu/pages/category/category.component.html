@@ -11,10 +11,18 @@
         <button mat-raised-button class="details_btn" (click)="openDialog(dish)">
           Details
         </button>
+        <div class="edit_del_btns" *ngIf="authorizedUser$ | async">
+          <button mat-raised-button>Delete</button>
+          <button mat-raised-button>Edit</button>
+        </div>
       </li>
     </ul>
   </ng-container>
   <ng-template #noDishes>
     <h2>No dishes</h2>
   </ng-template>
+
+  <ng-container *ngIf="authorizedUser$ | async">
+    <button mat-raised-button class="new_cat_btn">Add New Dish</button>
+ </ng-container>
 </main>

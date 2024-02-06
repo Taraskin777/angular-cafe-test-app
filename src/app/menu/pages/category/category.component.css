@@ -1,6 +1,7 @@
 main {
    height: 70vh;
    display: flex;
+   flex-direction: column;
    justify-content: center;
    align-items: center;
 }
@@ -9,6 +10,7 @@ ul {
   display: flex;
   justify-content: center;
   gap: 30px;
+  margin-bottom: 50px;
 }
 
 li {
@@ -50,4 +52,10 @@ a {
 
 .details_btn {
    margin:15px;
+}
+
+.edit_del_btns{
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
 }
