@@ -77,5 +77,28 @@ export class CategoryService {
     return forkJoin(deleteRequests);
   }
 
-  public editCategory() {}
+  public getCategory(categoryId: string): Observable<Categories> {
+    return this.http
+      .get<Categories>(`${this.url}/categories/${categoryId}`)
+      .pipe(
+        catchError(error => {
+          console.error('Error fetching category:', error);
+          return throwError(() => new Error('Error fetching category'));
+        })
+      );
+  }
+
+  public editCategory(
+    categoryId: string,
+    updatedCategory: Categories
+  ): Observable<Categories> {
+    return this.http
+      .put<Categories>(`${this.url}/categories/${categoryId}`, updatedCategory)
+      .pipe(
+        catchError(error => {
+          console.error('Error updating category:', error);
+          return throwError(() => new Error('Error updating category'));
+        })
+      );
+  }
 }
