@@ -46,10 +46,13 @@ export class CategoriesComponent implements OnInit {
   }
 
   deleteCategory(category: Categories): void {
-    this.categoryService.removeCategory(category.id).subscribe(() => {
-      this.categories$ = this.dataService.getData();
-      this.router.navigateByUrl('/');
-    });
+    this.categoryService
+      .removeCategory(category.id)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => {
+        this.categories$ = this.dataService.getData();
+        this.router.navigateByUrl('/');
+      });
   }
 
   trackByCategory(index: number, item: Categories): string {
