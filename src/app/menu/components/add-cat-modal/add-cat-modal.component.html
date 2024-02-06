@@ -1,0 +1,9 @@
+<div class="modal">
+   <form action="" [formGroup] = 'form'>
+      <label for="name">Category name</label>
+      <input type="text" id="name" formControlName="name">
+      <label for="img">Category image</label>
+      <input type="text" formControlName="image" id="img">
+      <button mat-raised-button (click)="closeDialog()" class="modal_btn" type="submit">Add Category</button>
+   </form>
+</div>
