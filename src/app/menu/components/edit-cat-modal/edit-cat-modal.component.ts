@@ -28,7 +28,8 @@ export class EditCatModalComponent implements OnInit {
     });
   }
 
-  getDataFromCategory() {
+
+  ngOnInit(): void {
     this.categoryService
       .getCategory(this.data.id)
       .pipe(take(1))
@@ -39,10 +40,6 @@ export class EditCatModalComponent implements OnInit {
           image: category.image,
         });
       });
-  }
-
-  ngOnInit(): void {
-    this.getDataFromCategory();
   }
 
   closeDialog(): void {
