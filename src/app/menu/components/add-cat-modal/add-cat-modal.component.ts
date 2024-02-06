@@ -50,7 +50,7 @@ export class AddCatModalComponent {
             window.location.reload();
           },
           error: error => {
-            console.error('Error:', error);
+            
           },
         });
     }

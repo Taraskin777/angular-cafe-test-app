@@ -1,5 +1,5 @@
 <div class="modal">
-   <form action="" [formGroup]="form">
+   <form action="" [formGroup]="form" (ngSubmit)="onSubmit()">
      <div>
        <label for="name">Category name</label>
        <input type="text" id="name" formControlName="name" />

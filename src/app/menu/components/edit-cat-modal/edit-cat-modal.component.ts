@@ -28,7 +28,6 @@ export class EditCatModalComponent implements OnInit {
     });
   }
 
-
   ngOnInit(): void {
     this.categoryService
       .getCategory(this.data.id)
@@ -44,5 +43,29 @@ export class EditCatModalComponent implements OnInit {
 
   closeDialog(): void {
     this.dialog.closeAll();
+  }
+
+  onSubmit(): void {
+    if (this.form.valid) {
+      const updatedCategory: Categories = {
+        id: this.category.id,
+        name: this.form.value.name,
+        image: this.form.value.image,
+      };
+
+      this.categoryService
+        .editCategory(updatedCategory.id, updatedCategory)
+        .pipe(take(1))
+        .subscribe({
+          next: () => {
+            this.form.reset();
+            this.dialog.closeAll();
+            window.location.reload();
+          },
+          error: error => {
+            console.error('Error:', error);
+          },
+        });
+    }
   }
 }
