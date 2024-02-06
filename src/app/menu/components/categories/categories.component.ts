@@ -29,10 +29,9 @@ export class CategoriesComponent implements OnInit {
 
   openDialog(): void {
     this.dialog.open(AddCatModalComponent);
-    console.log('Dialog');
   }
 
-  trackByCategory(index: number, item: Categories): number {
+  trackByCategory(index: number, item: Categories): string {
     return item.id;
   }
 }

@@ -14,6 +14,16 @@
       "id": "3",
       "name": "Sweets",
       "image": "https://www.sweets4me.co.uk/cdn/shop/collections/traditionalloose.jpg?v=1634895788"
+    },
+    {
+      "id": "28363839-bf51-4e45-9ebb-14020c0eaeed",
+      "name": "New dishes",
+      "image": "https://static01.nyt.com/images/2023/12/11/multimedia/11top-dishes-national7-zqfk/11top-dishes-national7-zqfk-videoSixteenByNine3000.jpg"
+    },
+    {
+      "id": "5b0253a5-f7bb-4dea-8869-f44c89031315",
+      "name": "Another tasty dishes!",
+      "image": "https://www.tastingtable.com/img/gallery/20-delicious-indian-dishes-you-have-to-try-at-least-once/l-intro-1645057933.jpg"
     }
   ],
   "dishes": [

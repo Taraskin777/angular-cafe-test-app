@@ -1,9 +1,19 @@
 <div class="modal">
-   <form action="" [formGroup] = 'form'>
+  <form action="" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div>
       <label for="name">Category name</label>
-      <input type="text" id="name" formControlName="name">
+      <input type="text" id="name" formControlName="name" />
+    </div>
+    <div>
       <label for="img">Category image</label>
-      <input type="text" formControlName="image" id="img">
-      <button mat-raised-button (click)="closeDialog()" class="modal_btn" type="submit">Add Category</button>
-   </form>
+      <input type="text" formControlName="image" id="img" />
+    </div>
+    <button
+      mat-raised-button
+      (click)="closeDialog()"
+      class="modal_btn"
+      type="submit">
+      Add Category
+    </button>
+  </form>
 </div>
