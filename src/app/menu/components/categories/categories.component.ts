@@ -9,6 +9,7 @@ import { CategoryService } from 'src/app/core/services/category.service';
 import { Router } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DestroyRef } from '@angular/core';
+import { EditCatModalComponent } from '../edit-cat-modal/edit-cat-modal.component';
 
 @Component({
   selector: 'app-categories',
@@ -36,6 +37,10 @@ export class CategoriesComponent implements OnInit {
 
   openDialog(): void {
     this.dialog.open(AddCatModalComponent);
+  }
+
+  openDialogForEdit(): void { 
+    this.dialog.open(EditCatModalComponent);
   }
 
   deleteCategory(category: Categories): void {
