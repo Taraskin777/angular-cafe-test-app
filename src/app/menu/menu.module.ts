@@ -9,6 +9,7 @@ import { CategoryComponent } from './pages/category/category.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { AddCatModalComponent } from './components/add-cat-modal/add-cat-modal.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { EditCatModalComponent } from './components/edit-cat-modal/edit-cat-modal.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     CategoryComponent,
     ModalComponent,
     AddCatModalComponent,
+    EditCatModalComponent,
   ],
   imports: [
     CommonModule,

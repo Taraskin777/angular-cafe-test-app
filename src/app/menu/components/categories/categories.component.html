@@ -6,11 +6,11 @@
           <a routerLink="/categories/{{category.id}}">
             <img [src]="category.image" [alt]="category.name" />
             <p>{{ category.name }}</p>
-            <div class="edit_del_btns" *ngIf="authorizedUser$ | async">
-              <button mat-raised-button (click)="deleteCategory(category)">Delete</button>
-              <button mat-raised-button>Edit</button>
-            </div>
           </a>
+          <div class="edit_del_btns" *ngIf="authorizedUser$ | async">
+            <button mat-raised-button (click)="deleteCategory(category)">Delete</button>
+            <button mat-raised-button>Edit</button>
+          </div>
         </li>
       </ul>
     </ng-container>
@@ -20,6 +20,6 @@
   </div>
 
   <ng-container *ngIf="authorizedUser$ | async">
-     <button mat-raised-button class="new_cat_btn" (click)="openDialog()">Add New Category</button>
+    <button mat-raised-button class="new_cat_btn" (click)="openDialog()">Add New Category</button>
   </ng-container>
 </main>
