@@ -39,8 +39,10 @@ export class CategoriesComponent implements OnInit {
     this.dialog.open(AddCatModalComponent);
   }
 
-  openDialogForEdit(): void { 
-    this.dialog.open(EditCatModalComponent);
+  openDialogForEdit(category: Categories): void {
+    this.dialog.open(EditCatModalComponent, {
+      data: category,
+    });
   }
 
   deleteCategory(category: Categories): void {

@@ -9,7 +9,7 @@
           </a>
           <div class="edit_del_btns" *ngIf="authorizedUser$ | async">
             <button mat-raised-button (click)="deleteCategory(category)">Delete</button>
-            <button mat-raised-button (click)="openDialogForEdit()">Edit</button>
+            <button mat-raised-button (click)="openDialogForEdit(category)">Edit</button>
           </div>
         </li>
       </ul>
