@@ -5,7 +5,6 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { take } from 'rxjs';
 import { CategoryService } from 'src/app/core/services/category.service';
-import { v4 as uuidv4 } from 'uuid';
 import { DataService } from 'src/app/core/services/data.service';
 
 @Component({
@@ -41,16 +40,19 @@ export class AddCatModalComponent {
         image: this.form.value.image,
       };
 
-      this.categoryService.addCategory(newCategory).subscribe({
-        next: () => {
-          this.form.reset();
-          this.dialog.closeAll();
-          this.dataService.updateCategories();
-        },
-        error: error => {
-          console.error('Error:', error);
-        },
-      });
+      this.categoryService
+        .addCategory(newCategory)
+        .pipe(take(1))
+        .subscribe({
+          next: () => {
+            this.form.reset();
+            this.dialog.closeAll();
+            this.dataService.updateCategories();
+          },
+          error: error => {
+            console.error('Error:', error);
+          },
+        });
     }
   }
 }

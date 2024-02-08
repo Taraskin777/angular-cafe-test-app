@@ -1,14 +1,12 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit,  DestroyRef} from '@angular/core';
 import { DataService } from 'src/app/core/services/data.service';
 import { Categories } from 'src/app/shared/interfaces/categories';
-import { Observable, switchMap, of, Subscription } from 'rxjs';
+import { Observable} from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddCatModalComponent } from '../add-cat-modal/add-cat-modal.component';
 import { CategoryService } from 'src/app/core/services/category.service';
-import { Router } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { DestroyRef } from '@angular/core';
 import { EditCatModalComponent } from '../edit-cat-modal/edit-cat-modal.component';
 
 
@@ -26,7 +24,6 @@ export class CategoriesComponent implements OnInit {
     private authService: AuthService,
     public dialog: MatDialog,
     private categoryService: CategoryService,
-    private router: Router,
     private destroyRef: DestroyRef
   ) {}
 
@@ -53,7 +50,6 @@ export class CategoriesComponent implements OnInit {
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(() => {
         this.dataService.updateCategories();
-        console.log('Updated categories');
       });
   }
 

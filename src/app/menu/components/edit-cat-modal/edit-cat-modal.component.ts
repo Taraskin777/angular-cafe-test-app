@@ -2,7 +2,6 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Categories } from 'src/app/shared/interfaces/categories';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
 import { take } from 'rxjs';
 import { CategoryService } from 'src/app/core/services/category.service';
 import { DataService } from 'src/app/core/services/data.service';
@@ -20,7 +19,6 @@ export class EditCatModalComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: Categories,
     public dialog: MatDialog,
     private fb: FormBuilder,
-    private router: Router,
     private categoryService: CategoryService,
     private dataService: DataService
   ) {

@@ -5,6 +5,7 @@ import { Categories } from 'src/app/shared/interfaces/categories';
 import { environment } from 'src/environment/environment';
 import { switchMap, forkJoin } from 'rxjs';
 import { Dishes } from 'src/app/shared/interfaces/dishes';
+import { of } from 'rxjs';
 
 interface NewCategory {
   name: string;
@@ -31,18 +32,6 @@ export class CategoryService {
   }
 
   public removeCategory(categoryId: string): Observable<void> {
-    // return this.http.delete<void>(`${this.url}/categories/${categoryId}`).pipe(
-    //   switchMap(() => {
-    //     console.log('Switch');
-    //     return this.http.delete<void>(
-    //       `${this.url}/dishes?categoryId=${categoryId}`
-    //     );
-    //   }),
-    //   catchError(error => {
-    //     console.error('Error remove category and related dishes:', error);
-    //     return throwError(() => new Error('Error'));
-    //   })
-    // );
 
     return this.http.get<Dishes[]>(`${this.url}/dishes`).pipe(
       switchMap((dishes: Dishes[]) => {
@@ -74,11 +63,15 @@ export class CategoryService {
   }
 
   private deleteDishes(dishes: Dishes[]): Observable<void[]> {
+    if (dishes.length === 0) {
+      return of([]);
+    }
     const deleteRequests: Observable<void>[] = [];
     dishes.forEach(dish => {
       const request = this.http.delete<void>(`${this.url}/dishes/${dish.id}`);
       deleteRequests.push(request);
     });
+
     return forkJoin(deleteRequests);
   }
 
