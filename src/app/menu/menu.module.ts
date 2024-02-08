@@ -7,6 +7,8 @@ import { CategoriesComponent } from './components/categories/categories.componen
 import { MainComponent } from './pages/main/main.component';
 import { CategoryComponent } from './pages/category/category.component';
 import { ModalComponent } from './components/modal/modal.component';
+import { AddDishModalComponent } from './components/add-dish-modal/add-dish-modal.component';
+import { EditDishModalComponent } from './components/edit-dish-modal/edit-dish-modal.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +16,8 @@ import { ModalComponent } from './components/modal/modal.component';
     MainComponent,
     CategoryComponent,
     ModalComponent,
+    AddDishModalComponent,
+    EditDishModalComponent,
   ],
   imports: [CommonModule, MenuRoutingModule, MatButtonModule, MatDialogModule],
   exports: [CategoriesComponent, MainComponent],
