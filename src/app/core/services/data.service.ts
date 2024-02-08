@@ -17,6 +17,7 @@ export class DataService {
 
   currentDishes$ = this.dishes.asObservable();
 
+
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute
@@ -45,9 +46,7 @@ export class DataService {
       );
   }
 
-  public updateDishes(): void {
-    const categoryId = Number(this.route.snapshot.paramMap.get('categoryId'));
-
+  public updateDishes(categoryId: number): void {
     this.getDishesFromCategory(categoryId)
       .pipe(take(1))
       .subscribe({

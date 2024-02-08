@@ -1,12 +1,14 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Dishes } from 'src/app/shared/interfaces/dishes';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { take } from 'rxjs';
 import { DishesService } from 'src/app/core/services/dishes.service';
 import { DataService } from 'src/app/core/services/data.service';
-import { ActivatedRoute } from '@angular/router';
 import { NewDish } from 'src/app/core/services/dishes.service';
+
+export interface DialogData {
+  categoryId: number;
+}
 
 @Component({
   selector: 'app-add-dish-modal',
@@ -17,12 +19,11 @@ export class AddDishModalComponent {
   form: FormGroup;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) data: Dishes,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
     public dialog: MatDialog,
     private fb: FormBuilder,
     private dataService: DataService,
-    private dishService: DishesService,
-    private route: ActivatedRoute
+    private dishService: DishesService
   ) {
     this.form = this.fb.group({
       name: this.fb.control('', [Validators.required]),
@@ -39,11 +40,11 @@ export class AddDishModalComponent {
   onSubmit(): void {
     if (this.form.valid) {
       const newDish: NewDish = {
+        categoryId: this.data.categoryId,
         name: this.form.value.name,
         image: this.form.value.image,
         description: this.form.value.description,
         price: this.form.value.price,
-        categoryId: Number(this.route.snapshot.paramMap.get('categoryId')),
       };
 
       this.dishService
@@ -53,7 +54,7 @@ export class AddDishModalComponent {
           next: () => {
             this.form.reset();
             this.dialog.closeAll();
-            this.dataService.updateDishes();
+            this.dataService.updateDishes(this.data.categoryId);
           },
           error: error => {
             console.error('Error:', error);

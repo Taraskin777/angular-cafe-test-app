@@ -23,6 +23,6 @@
   </ng-template>
 
   <ng-container *ngIf="authorizedUser$ | async">
-    <button mat-raised-button class="new_cat_btn">Add New Dish</button>
+    <button mat-raised-button class="new_cat_btn" (click)="openDialogForAddDish()">Add New Dish</button>
  </ng-container>
 </main>

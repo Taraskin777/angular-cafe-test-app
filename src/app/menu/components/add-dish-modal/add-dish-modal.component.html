@@ -1,1 +1,27 @@
-<p>add-dish-modal works!</p>
+<div class="modal">
+   <form [formGroup]="form" (ngSubmit)="onSubmit()">
+     <div>
+       <label for="name">Dish name</label>
+       <input type="text" id="name" formControlName="name" />
+     </div>
+     <div>
+       <label for="img">Dish image</label>
+       <input type="text" formControlName="image" id="img" />
+     </div>
+     <div>
+       <label for="descr">Dish description</label>
+       <input type="text" formControlName="description" id="descr" />
+     </div>
+     <div>
+       <label for="price">Dish price</label>
+       <input type="text" formControlName="price" id="price" />
+     </div>
+     <button
+       mat-raised-button
+       (click)="closeDialog()"
+       class="modal_btn"
+       type="submit">
+       Add Dish
+     </button>
+   </form>
+ </div>
