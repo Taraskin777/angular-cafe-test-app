@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { EditDishesService } from './edit-dishes.service';
+import { DishesService } from './dishes.service';
 
-describe('EditDishesService', () => {
-  let service: EditDishesService;
+describe('DishesService', () => {
+  let service: DishesService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(EditDishesService);
+    service = TestBed.inject(DishesService);
   });
 
   it('should be created', () => {
