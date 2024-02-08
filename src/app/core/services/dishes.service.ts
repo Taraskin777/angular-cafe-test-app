@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, catchError, throwError, BehaviorSubject } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 import { environment } from 'src/environment/environment';
 import { Dishes } from 'src/app/shared/interfaces/dishes';
 import { of } from 'rxjs';
 
-interface NewDish {
+export interface NewDish {
   categoryId: number;
   name: string;
   image: string;
@@ -21,9 +21,16 @@ export class DishesService {
 
   constructor(private http: HttpClient) {}
 
-  public addDish(dish: NewDish) {}
+  public addDish(dish: NewDish): Observable<Dishes> {
+    return this.http.post<Dishes>(`${this.url}/dishes`, dish).pipe(
+      catchError(error => {
+        console.error('Error adding dish:', error);
+        return throwError(error);
+      })
+    );
+  }
 
   public removeDish(dishId: number) {}
 
-  public updateDish(dishId: number, updateDish: Dishes) {}
+  public editDish(dishId: number, updateDish: Dishes) {}
 }
