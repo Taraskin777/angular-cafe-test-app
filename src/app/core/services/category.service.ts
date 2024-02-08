@@ -1,10 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, catchError, throwError } from 'rxjs';
+import { Observable, catchError, throwError, BehaviorSubject } from 'rxjs';
 import { Categories } from 'src/app/shared/interfaces/categories';
 import { environment } from 'src/environment/environment';
 import { switchMap, forkJoin } from 'rxjs';
 import { Dishes } from 'src/app/shared/interfaces/dishes';
+
+interface NewCategory {
+  name: string;
+  image: string;
+}
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +19,7 @@ export class CategoryService {
 
   constructor(private http: HttpClient) {}
 
-  public addCategory(newCategory: Categories): Observable<Categories> {
+  public addCategory(newCategory: NewCategory): Observable<Categories> {
     return this.http
       .post<Categories>(`${this.url}/categories`, newCategory)
       .pipe(

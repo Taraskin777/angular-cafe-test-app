@@ -5,6 +5,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { take } from 'rxjs';
 import { CategoryService } from 'src/app/core/services/category.service';
+import { DataService } from 'src/app/core/services/data.service';
 
 @Component({
   selector: 'app-edit-cat-modal',
@@ -20,7 +21,8 @@ export class EditCatModalComponent implements OnInit {
     public dialog: MatDialog,
     private fb: FormBuilder,
     private router: Router,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private dataService: DataService
   ) {
     this.form = this.fb.group({
       name: this.fb.control('', [Validators.required]),
@@ -60,7 +62,7 @@ export class EditCatModalComponent implements OnInit {
           next: () => {
             this.form.reset();
             this.dialog.closeAll();
-            window.location.reload();
+            this.dataService.updateCategories();
           },
           error: error => {
             console.error('Error:', error);

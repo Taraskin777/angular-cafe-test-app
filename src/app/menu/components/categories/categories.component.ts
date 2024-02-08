@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { DataService } from 'src/app/core/services/data.service';
 import { Categories } from 'src/app/shared/interfaces/categories';
-import { Observable } from 'rxjs';
+import { Observable, switchMap, of, Subscription } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddCatModalComponent } from '../add-cat-modal/add-cat-modal.component';
@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DestroyRef } from '@angular/core';
 import { EditCatModalComponent } from '../edit-cat-modal/edit-cat-modal.component';
+
 
 @Component({
   selector: 'app-categories',
@@ -31,7 +32,8 @@ export class CategoriesComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.checkAdminStatus();
-    this.categories$ = this.dataService.getData();
+    this.dataService.updateCategories();
+    this.categories$ = this.dataService.currentCategories$;
     this.authorizedUser$ = this.authService.currentAuth$;
   }
 
@@ -50,8 +52,8 @@ export class CategoriesComponent implements OnInit {
       .removeCategory(category.id)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(() => {
-        this.categories$ = this.dataService.getData();
-        this.router.navigateByUrl('/');
+        this.dataService.updateCategories();
+        console.log('Updated categories');
       });
   }
 
