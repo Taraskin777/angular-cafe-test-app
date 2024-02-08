@@ -25,12 +25,19 @@ export class DishesService {
     return this.http.post<Dishes>(`${this.url}/dishes`, dish).pipe(
       catchError(error => {
         console.error('Error adding dish:', error);
-        return throwError(error);
+        return throwError(() => new Error('Error'));
       })
     );
   }
 
-  public removeDish(dishId: number) {}
+  public removeDish(dishId: number): Observable<void> {
+    return this.http.delete<void>(`${this.url}/dishes/${dishId}`).pipe(
+      catchError(error => {
+        console.error('Error deleting ${dishId}', error);
+        return throwError(() => new Error('Error'));
+      })
+    );
+  }
 
   public editDish(dishId: number, updateDish: Dishes) {}
 }

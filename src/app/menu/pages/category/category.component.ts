@@ -7,6 +7,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../../components/modal/modal.component';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { AddDishModalComponent } from '../../components/add-dish-modal/add-dish-modal.component';
+import { DishesService } from 'src/app/core/services/dishes.service';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-category',
@@ -22,19 +24,16 @@ export class CategoryComponent implements OnInit {
     private dataService: DataService,
     private route: ActivatedRoute,
     public dialog: MatDialog,
-    private authService: AuthService
+    private authService: AuthService,
+    private dishesService: DishesService
   ) {}
 
   ngOnInit(): void {
     this.categoryId = Number(this.route.snapshot.paramMap.get('categoryId'));
     this.dataService.updateDishes(this.categoryId);
-    // this.dishes$ = this.dataService.getDishesFromCategory(this.categoryId);
     this.dishes$ = this.dataService.currentDishes$;
     this.authService.checkAdminStatus();
     this.authorizedUser$ = this.authService.currentAuth$;
-    this.dishes$.subscribe(dishes => {
-      console.log('Dishes:', dishes);
-    });
   }
 
   openDialog(dish: Dishes): void {
@@ -52,7 +51,16 @@ export class CategoryComponent implements OnInit {
     });
   }
 
-
+  deleteDish(dish: Dishes): void {
+    if (dish.id) {
+      this.dishesService
+        .removeDish(dish.id)
+        .pipe(take(1))
+        .subscribe(() => {
+          this.dataService.updateDishes(this.categoryId);
+        });
+    }
+  }
 
   trackByDishes(index: number, item: Dishes): number {
     return item.id;
