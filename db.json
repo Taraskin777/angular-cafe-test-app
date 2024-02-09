@@ -17,7 +17,7 @@
     },
     {
       "id": "c4d0",
-      "name": "Color 2",
+      "name": "Color",
       "image": "https://www.tastingtable.com/img/gallery/20-delicious-indian-dishes-you-have-to-try-at-least-once/l-intro-1645057933.jpg"
     }
   ],
@@ -60,7 +60,7 @@
       "name": "Hot-smoked salmon vol-au-vents",
       "image": "https://images.immediate.co.uk/production/volatile/sites/2/2021/08/OLI_0921_FREEZER-ENTERTAINING-3-10-THINGS-INSPIRATION-ROSIE-PHOTOGRAPHY-HAYLEY-BENOIT-LONDON-JULY-2021-TIFF-FULL-SIZE-7--fd675f5.jpg?quality=90&webp=true&resize=975,649",
       "description": "A brilliant main for a special occasion – make these hot-smoked salmon vol au vents ahead of time, then reheat and assemble to serve.",
-      "price": 25.99
+      "price": "3"
     },
     {
       "id": "6",
@@ -68,15 +68,7 @@
       "name": "Roast Pork",
       "image": "https://images.immediate.co.uk/production/volatile/sites/2/2022/11/Roast-pork-shoulder-with-cinnamon-and-clementines-4cd22bd.jpg?quality=90&webp=true&resize=800,533",
       "description": "Serve this fall-apart roast pork shoulder with tortillas, sour cream and lime and let everyone dig in.",
-      "price": 19.99
-    },
-    {
-      "id": "f85b",
-      "categoryId": 2,
-      "name": "Color",
-      "image": "https://www.tastingtable.com/img/gallery/20-delicious-indian-dishes-you-have-to-try-at-least-once/l-intro-1645057933.jpg",
-      "description": "dfgfdg",
-      "price": "65465"
+      "price": "43"
     },
     {
       "id": "d7a0",
@@ -122,12 +114,20 @@
       "price": "2553"
     },
     {
-      "id": "1daa",
-      "categoryId": "6fc1",
+      "id": "13a1",
+      "categoryId": "c4d0",
       "name": "Color",
       "image": "https://www.tastingtable.com/img/gallery/20-delicious-indian-dishes-you-have-to-try-at-least-once/l-intro-1645057933.jpg",
       "description": "dfgfdg",
       "price": "2553"
+    },
+    {
+      "id": "e3b4",
+      "categoryId": "c4d0",
+      "name": "testuser",
+      "image": "https://www.tastingtable.com/img/gallery/20-delicious-indian-dishes-you-have-to-try-at-least-once/l-intro-1645057933.jpg",
+      "description": "dsfsggsgdsgdgdgd",
+      "price": "65465"
     }
   ],
   "users": [

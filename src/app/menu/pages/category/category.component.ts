@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { AddDishModalComponent } from '../../components/add-dish-modal/add-dish-modal.component';
 import { DishesService } from 'src/app/core/services/dishes.service';
 import { take } from 'rxjs';
+import { EditDishModalComponent } from '../../components/edit-dish-modal/edit-dish-modal.component';
 
 @Component({
   selector: 'app-category',
@@ -52,6 +53,12 @@ export class CategoryComponent implements OnInit {
   openDialogForAddDish(): void {
     this.dialog.open(AddDishModalComponent, {
       data: { categoryId: this.categoryId },
+    });
+  }
+
+  openDialogForEditDish(dish: Dishes): void {
+    this.dialog.open(EditDishModalComponent, {
+      data: dish,
     });
   }
 

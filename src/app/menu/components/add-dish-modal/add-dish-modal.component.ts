@@ -39,7 +39,7 @@ export class AddDishModalComponent {
 
   onSubmit(): void {
     if (this.form.valid) {
-      const newDish: NewDish = {
+      const newDish = {
         categoryId: this.data.categoryId,
         name: this.form.value.name,
         image: this.form.value.image,
