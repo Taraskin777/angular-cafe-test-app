@@ -37,7 +37,7 @@ export class CategoryComponent implements OnInit {
   }
 
   update() {
-    this.dataService.updateDishes(this.categoryId).subscribe();
+    this.dataService.updateDishes(this.categoryId).pipe(take(1)).subscribe();
   }
 
   openDialog(dish: Dishes): void {

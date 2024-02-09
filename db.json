@@ -17,7 +17,7 @@
     },
     {
       "id": "c4d0",
-      "name": "Color",
+      "name": "Color 2",
       "image": "https://www.tastingtable.com/img/gallery/20-delicious-indian-dishes-you-have-to-try-at-least-once/l-intro-1645057933.jpg"
     }
   ],
@@ -77,14 +77,6 @@
       "image": "https://www.tastingtable.com/img/gallery/20-delicious-indian-dishes-you-have-to-try-at-least-once/l-intro-1645057933.jpg",
       "description": "dfgfdg",
       "price": "65465"
-    },
-    {
-      "id": "7402",
-      "categoryId": 1,
-      "name": "Color",
-      "image": "https://www.tastingtable.com/img/gallery/20-delicious-indian-dishes-you-have-to-try-at-least-once/l-intro-1645057933.jpg",
-      "description": "dfgfdg",
-      "price": "2553"
     },
     {
       "id": "d7a0",

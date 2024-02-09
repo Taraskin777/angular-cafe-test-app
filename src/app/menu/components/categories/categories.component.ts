@@ -39,7 +39,10 @@ export class CategoriesComponent implements OnInit {
   }
 
   update() {
-    this.dataService.updateCategories().subscribe();
+    this.dataService
+      .updateCategories()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe();
   }
 
   openDialogForEdit(category: Categories): void {
