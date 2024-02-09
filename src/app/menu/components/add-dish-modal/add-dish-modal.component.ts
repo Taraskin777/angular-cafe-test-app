@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { take } from 'rxjs';
+import { switchMap, take } from 'rxjs';
 import { DishesService } from 'src/app/core/services/dishes.service';
 import { DataService } from 'src/app/core/services/data.service';
 import { NewDish } from 'src/app/core/services/dishes.service';
@@ -47,16 +47,16 @@ export class AddDishModalComponent {
         price: this.form.value.price,
       };
 
-      console.log(newDish);
-
       this.dishService
         .addDish(newDish)
-        .pipe(take(1))
+        .pipe(
+          switchMap(() => this.dataService.updateDishes(newDish.categoryId)),
+          take(1)
+        )
         .subscribe({
           next: () => {
             this.form.reset();
             this.dialog.closeAll();
-            this.dataService.updateDishes(this.data.categoryId);
           },
           error: error => {
             console.error('Error:', error);

@@ -8,7 +8,7 @@ import { AddCatModalComponent } from '../add-cat-modal/add-cat-modal.component';
 import { CategoryService } from 'src/app/core/services/category.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { EditCatModalComponent } from '../edit-cat-modal/edit-cat-modal.component';
-import {switchMap } from 'rxjs';
+import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-categories',
@@ -31,7 +31,6 @@ export class CategoriesComponent implements OnInit {
     this.authService.checkAdminStatus();
     this.categories$ = this.dataService.currentCategories$;
     this.update();
-    this.categories$.subscribe();
     this.authorizedUser$ = this.authService.currentAuth$;
   }
 

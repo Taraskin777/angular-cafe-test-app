@@ -50,17 +50,16 @@ export class DataService {
       );
   }
 
-  public updateDishes(categoryId: string): void {
-    this.getDishesFromCategory(categoryId)
-      .pipe(take(1))
-      .subscribe({
-        next: (dishes: Dishes[]) => {
-          this.dishes.next(dishes);
-        },
-        error: error => {
-          console.error('Error updating dishes:', error);
-        },
-      });
+  public updateDishes(categoryId: string): Observable<Dishes[]> {
+    return this.getDishesFromCategory(categoryId).pipe(
+      tap((dishes: Dishes[]) => {
+        this.dishes.next(dishes);
+      }),
+      catchError(error => {
+        console.log('Error updating dishes: ', error);
+        return throwError(() => new Error('test'));
+      })
+    );
   }
 
   public updateCategories(): Observable<Categories[]> {
