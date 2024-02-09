@@ -3,7 +3,7 @@
 </button>
 <main>
   <ng-container *ngIf="dishes$ | async as dishes; else noDishes">
-    <ul *ngIf="dishes.length > 0">
+    <ul *ngIf="dishes.length > 0; else noDishes">
       <li *ngFor="let dish of dishes; trackBy: trackByDishes">
         <img [src]="dish.image" [alt]="dish.name" />
         <p>{{ dish.name }}</p>
