@@ -2,10 +2,10 @@ import { Component, Inject } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Categories } from 'src/app/shared/interfaces/categories';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
 import { take } from 'rxjs';
 import { CategoryService } from 'src/app/core/services/category.service';
 import { DataService } from 'src/app/core/services/data.service';
+import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-add-cat-modal',
@@ -19,7 +19,6 @@ export class AddCatModalComponent {
     @Inject(MAT_DIALOG_DATA) public data: Categories,
     public dialog: MatDialog,
     private fb: FormBuilder,
-    private router: Router,
     private categoryService: CategoryService,
     private dataService: DataService
   ) {
@@ -35,19 +34,18 @@ export class AddCatModalComponent {
 
   onSubmit(): void {
     if (this.form.valid) {
-      const newCategory = {
-        name: this.form.value.name,
-        image: this.form.value.image,
-      };
+      const newCategory = this.form.value;
 
       this.categoryService
         .addCategory(newCategory)
-        .pipe(take(1))
+        .pipe(
+          switchMap(() => this.dataService.updateCategories()),
+          take(1),
+        )
         .subscribe({
           next: () => {
             this.form.reset();
             this.dialog.closeAll();
-            this.dataService.updateCategories();
           },
           error: error => {
             console.error('Error:', error);

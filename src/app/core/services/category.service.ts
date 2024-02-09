@@ -32,7 +32,6 @@ export class CategoryService {
   }
 
   public removeCategory(categoryId: string): Observable<void> {
-
     return this.http.get<Dishes[]>(`${this.url}/dishes`).pipe(
       switchMap((dishes: Dishes[]) => {
         const filteredDishes = dishes.filter(
@@ -62,17 +61,12 @@ export class CategoryService {
     );
   }
 
-  private deleteDishes(dishes: Dishes[]): Observable<void[]> {
-    if (dishes.length === 0) {
-      return of([]);
-    }
-    const deleteRequests: Observable<void>[] = [];
-    dishes.forEach(dish => {
-      const request = this.http.delete<void>(`${this.url}/dishes/${dish.id}`);
-      deleteRequests.push(request);
-    });
-
-    return forkJoin(deleteRequests);
+  private deleteDishes(dishes: Dishes[]): Observable<Object[]> {
+    return dishes.length
+      ? forkJoin(
+          dishes.map(dish => this.http.delete(`${this.url}/dishes/${dish.id}`))
+        )
+      : of([]);
   }
 
   public getCategory(categoryId: string): Observable<Categories> {

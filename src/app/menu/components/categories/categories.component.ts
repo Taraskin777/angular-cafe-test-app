@@ -1,14 +1,14 @@
-import { Component, OnInit,  DestroyRef} from '@angular/core';
+import { Component, OnInit, DestroyRef } from '@angular/core';
 import { DataService } from 'src/app/core/services/data.service';
 import { Categories } from 'src/app/shared/interfaces/categories';
-import { Observable} from 'rxjs';
+import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddCatModalComponent } from '../add-cat-modal/add-cat-modal.component';
 import { CategoryService } from 'src/app/core/services/category.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { EditCatModalComponent } from '../edit-cat-modal/edit-cat-modal.component';
-
+import {switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-categories',
@@ -29,13 +29,18 @@ export class CategoriesComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.checkAdminStatus();
-    this.dataService.updateCategories();
     this.categories$ = this.dataService.currentCategories$;
+    this.update();
+    this.categories$.subscribe();
     this.authorizedUser$ = this.authService.currentAuth$;
   }
 
   openDialog(): void {
     this.dialog.open(AddCatModalComponent);
+  }
+
+  update() {
+    this.dataService.updateCategories().subscribe();
   }
 
   openDialogForEdit(category: Categories): void {
@@ -47,10 +52,13 @@ export class CategoriesComponent implements OnInit {
   deleteCategory(category: Categories): void {
     this.categoryService
       .removeCategory(category.id)
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(() => {
-        this.dataService.updateCategories();
-      });
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        switchMap(() => {
+          return this.dataService.updateCategories();
+        })
+      )
+      .subscribe();
   }
 
   trackByCategory(index: number, item: Categories): string {

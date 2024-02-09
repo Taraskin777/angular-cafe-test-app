@@ -5,7 +5,7 @@ import { catchError } from 'rxjs/operators';
 import { Categories } from 'src/app/shared/interfaces/categories';
 import { environment } from 'src/environment/environment';
 import { Dishes } from 'src/app/shared/interfaces/dishes';
-import { take } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -42,16 +42,15 @@ export class DataService {
       );
   }
 
-  public updateCategories(): void {
-    this.getData()
-      .pipe(take(1))
-      .subscribe({
-        next: (categories: Categories[]) => {
-          this.categories.next(categories);
-        },
-        error: error => {
-          console.error('Error updating categories:', error);
-        },
-      });
+  public updateCategories(): Observable<Categories[]> {
+    return this.getData().pipe(
+      tap((categories: Categories[]) => {
+        this.categories.next(categories);
+      }),
+      catchError(error => {
+        console.error('Error updating categories:', error);
+        return throwError(() => new Error('test'));
+      })
+    );
   }
 }

@@ -11,14 +11,14 @@
       "image": "https://frenchly.us/wp-content/uploads/sites/9/2017/08/shutterstock_90307252.jpg.webp"
     },
     {
-      "id": "3",
-      "name": "Sweets",
-      "image": "https://www.sweets4me.co.uk/cdn/shop/collections/traditionalloose.jpg?v=1634895788"
+      "id": "6fc1",
+      "name": "Color",
+      "image": "https://www.tastingtable.com/img/gallery/20-delicious-indian-dishes-you-have-to-try-at-least-once/l-intro-1645057933.jpg"
     },
     {
-      "id": "2e94",
-      "name": "Color 2",
-      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg/800px-Good_Food_Display_-_NCI_Visuals_Online.jpg"
+      "id": "c4d0",
+      "name": "Color",
+      "image": "https://www.tastingtable.com/img/gallery/20-delicious-indian-dishes-you-have-to-try-at-least-once/l-intro-1645057933.jpg"
     }
   ],
   "dishes": [
@@ -69,14 +69,6 @@
       "image": "https://images.immediate.co.uk/production/volatile/sites/2/2022/11/Roast-pork-shoulder-with-cinnamon-and-clementines-4cd22bd.jpg?quality=90&webp=true&resize=800,533",
       "description": "Serve this fall-apart roast pork shoulder with tortillas, sour cream and lime and let everyone dig in.",
       "price": 19.99
-    },
-    {
-      "id": "7",
-      "categoryId": "3",
-      "name": "Ice Cream",
-      "image": "https://www.washingtonpost.com/resizer/qYpYDV1BjKI3ZimLblCjjFXhc2k=/arc-anglerfish-washpost-prod-washpost/public/KUFWIPXROII6ZLAWR67XDFGNPA.jpg",
-      "description": "Ice cream is a mixture of milk, cream, sugar, and sometimes other ingredients that has been frozen into a soft, creamy delight using special techniques. Ice cream has been a popular treat for hundreds of years but has only become commonplace since the widespread use of refrigeration. The exploding popularity of ice cream has led to a number of ice cream variations including frozen custard, frozen yogurt, and even non-dairy versions made with ingredients like coconut milk.",
-      "price": 29.99
     }
   ],
   "users": [
