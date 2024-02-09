@@ -7,7 +7,7 @@ import { DataService } from 'src/app/core/services/data.service';
 import { NewDish } from 'src/app/core/services/dishes.service';
 
 export interface DialogData {
-  categoryId: number;
+  categoryId: string;
 }
 
 @Component({
@@ -46,6 +46,8 @@ export class AddDishModalComponent {
         description: this.form.value.description,
         price: this.form.value.price,
       };
+
+      console.log(newDish);
 
       this.dishService
         .addDish(newDish)

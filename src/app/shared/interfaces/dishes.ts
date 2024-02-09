@@ -1,5 +1,5 @@
 export interface Dishes {
-  id: number;
+  id: string;
   categoryId: string;
   name: string;
   image: string;

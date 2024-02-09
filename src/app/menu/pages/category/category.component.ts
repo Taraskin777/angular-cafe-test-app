@@ -18,7 +18,7 @@ import { take } from 'rxjs';
 export class CategoryComponent implements OnInit {
   dishes$: Observable<Dishes[]> | undefined;
   authorizedUser$: Observable<boolean> | undefined;
-  categoryId: number = 0;
+  categoryId: string = '';
 
   constructor(
     private dataService: DataService,
@@ -29,7 +29,7 @@ export class CategoryComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.categoryId = Number(this.route.snapshot.paramMap.get('categoryId'));
+    this.categoryId = String(this.route.snapshot.paramMap.get('categoryId'));
     this.dataService.updateDishes(this.categoryId);
     this.dishes$ = this.dataService.currentDishes$;
     this.authService.checkAdminStatus();
@@ -62,7 +62,7 @@ export class CategoryComponent implements OnInit {
     }
   }
 
-  trackByDishes(index: number, item: Dishes): number {
+  trackByDishes(index: number, item: Dishes): string {
     return item.id;
   }
 }

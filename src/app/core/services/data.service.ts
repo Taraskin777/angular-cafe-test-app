@@ -36,7 +36,7 @@ export class DataService {
     );
   }
 
-  public getDishesFromCategory(category: number): Observable<Dishes[]> {
+  public getDishesFromCategory(category: string): Observable<Dishes[]> {
     return this.http
       .get<Dishes[]>(`${this.url}/dishes?categoryId=${category}`)
       .pipe(
@@ -50,7 +50,7 @@ export class DataService {
       );
   }
 
-  public updateDishes(categoryId: number): void {
+  public updateDishes(categoryId: string): void {
     this.getDishesFromCategory(categoryId)
       .pipe(take(1))
       .subscribe({

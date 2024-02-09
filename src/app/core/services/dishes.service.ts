@@ -6,7 +6,7 @@ import { Dishes } from 'src/app/shared/interfaces/dishes';
 import { of } from 'rxjs';
 
 export interface NewDish {
-  categoryId: number;
+  categoryId: string;
   name: string;
   image: string;
   description: string;
@@ -30,7 +30,7 @@ export class DishesService {
     );
   }
 
-  public removeDish(dishId: number): Observable<void> {
+  public removeDish(dishId: string): Observable<void> {
     return this.http.delete<void>(`${this.url}/dishes/${dishId}`).pipe(
       catchError(error => {
         console.error('Error deleting ${dishId}', error);
@@ -39,5 +39,5 @@ export class DishesService {
     );
   }
 
-  public editDish(dishId: number, updateDish: Dishes) {}
+  public editDish(dishId: string, updateDish: Dishes) {}
 }
