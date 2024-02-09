@@ -7,6 +7,9 @@ import { CategoriesComponent } from './components/categories/categories.componen
 import { MainComponent } from './pages/main/main.component';
 import { CategoryComponent } from './pages/category/category.component';
 import { ModalComponent } from './components/modal/modal.component';
+import { AddCatModalComponent } from './components/add-cat-modal/add-cat-modal.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { EditCatModalComponent } from './components/edit-cat-modal/edit-cat-modal.component';
 
 @NgModule({
   declarations: [
@@ -14,8 +17,16 @@ import { ModalComponent } from './components/modal/modal.component';
     MainComponent,
     CategoryComponent,
     ModalComponent,
+    AddCatModalComponent,
+    EditCatModalComponent,
   ],
-  imports: [CommonModule, MenuRoutingModule, MatButtonModule, MatDialogModule],
+  imports: [
+    CommonModule,
+    MenuRoutingModule,
+    MatButtonModule,
+    MatDialogModule,
+    ReactiveFormsModule,
+  ],
   exports: [CategoriesComponent, MainComponent],
 })
 export class MenuModule {}
