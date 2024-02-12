@@ -7,7 +7,7 @@ import { ModalComponent } from '../../components/modal/modal.component';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { AddDishModalComponent } from '../../components/add-dish-modal/add-dish-modal.component';
 import { DishesService } from 'src/app/core/services/dishes.service';
-import { take } from 'rxjs';
+import { take, switchMap } from 'rxjs';
 import { EditDishModalComponent } from '../../components/edit-dish-modal/edit-dish-modal.component';
 
 @Component({
@@ -66,10 +66,11 @@ export class CategoryComponent implements OnInit {
     if (dish.id) {
       this.dishesService
         .removeDish(dish.id)
-        .pipe(take(1))
-        .subscribe(() => {
-          this.dishesService.updateDishes(this.categoryId).subscribe();
-        });
+        .pipe(
+          take(1),
+          switchMap(() => this.dishesService.updateDishes(this.categoryId))
+        )
+        .subscribe();
     }
   }
 

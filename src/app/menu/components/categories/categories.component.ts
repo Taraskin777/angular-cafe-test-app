@@ -41,7 +41,7 @@ export class CategoriesComponent implements OnInit {
     this.dialog.open(AddCatModalComponent);
   }
 
-  update() {
+  update():void {
     this.categoryService
       .updateCategories()
       .pipe(takeUntilDestroyed(this.destroyRef))

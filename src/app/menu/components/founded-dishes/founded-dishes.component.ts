@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { Dishes } from 'src/app/shared/interfaces/dishes';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../modal/modal.component';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-founded-dishes',
@@ -16,8 +15,7 @@ export class FoundedDishesComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
-    private dishesService: DishesService,
-    private destroyRef: DestroyRef,
+    private dishesService: DishesService
   ) {}
 
   ngOnInit(): void {
@@ -32,7 +30,6 @@ export class FoundedDishesComponent implements OnInit {
       },
     });
   }
-
 
   trackByDishes(index: number, item: Dishes): string {
     return item.id;

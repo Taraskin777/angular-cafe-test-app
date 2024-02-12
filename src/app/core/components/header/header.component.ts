@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, take } from 'rxjs';
 import { DishesService } from '../../services/dishes.service';
 
 @Component({
@@ -12,8 +12,6 @@ import { DishesService } from '../../services/dishes.service';
 export class HeaderComponent implements OnInit {
   authorizedUser$: Observable<boolean> | undefined;
   searchValue: string = '';
-  placeholder: string = 'Search dish';
-  minimumSearchValue: string = 'At least 3 letters';
 
   constructor(
     private authService: AuthService,
@@ -31,13 +29,11 @@ export class HeaderComponent implements OnInit {
     this.router.navigateByUrl('/');
   }
 
-  searchDishes() {
+  searchDishes(): void {
     if (this.searchValue.length >= 3) {
-      this.dishesService.findDishes(this.searchValue).subscribe();
+      this.dishesService.findDishes(this.searchValue).pipe(take(1)).subscribe();
     } else if (this.searchValue.length < 3) {
       this.dishesService.clearFoundDishes();
-    } else {
-      console.log('Please enter at least 3 characters.');
     }
   }
 }
