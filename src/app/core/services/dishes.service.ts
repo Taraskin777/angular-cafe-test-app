@@ -34,7 +34,7 @@ export class DishesService {
             `Error fetching dishes for category with category ${category}:`,
             error
           );
-          return throwError(() => new Error('test'));
+          return throwError(() => new Error('Error'));
         })
       );
   }
@@ -46,7 +46,7 @@ export class DishesService {
       }),
       catchError(error => {
         console.log('Error updating dishes: ', error);
-        return throwError(() => new Error('test'));
+        return throwError(() => new Error('Error'));
       })
     );
   }

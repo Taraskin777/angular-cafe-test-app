@@ -28,7 +28,7 @@ export class CategoryService {
     return this.http.get<Categories[]>(`${this.url}/categories`).pipe(
       catchError(error => {
         console.error('Error fetching categories:', error);
-        return throwError(() => new Error('test'));
+        return throwError(() => new Error('Error fetching categories'));
       })
     );
   }
@@ -40,7 +40,7 @@ export class CategoryService {
       }),
       catchError(error => {
         console.error('Error updating categories:', error);
-        return throwError(() => new Error('test'));
+        return throwError(() => new Error('Error updating categories'));
       })
     );
   }
@@ -51,7 +51,7 @@ export class CategoryService {
       .pipe(
         catchError(error => {
           console.error('Error add new category:', error);
-          return throwError(() => new Error('Error'));
+          return throwError(() => new Error('Error adding new category'));
         })
       );
   }
@@ -114,7 +114,7 @@ export class CategoryService {
       .pipe(
         catchError(error => {
           console.error('Error updating category:', error);
-          return throwError(() => new Error('Error updating category'));
+          return throwError(() => new Error('Error edit category'));
         })
       );
   }
