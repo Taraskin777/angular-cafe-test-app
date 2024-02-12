@@ -8,6 +8,8 @@ import { CategoryService } from 'src/app/core/services/category.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { EditCatModalComponent } from '../edit-cat-modal/edit-cat-modal.component';
 import { switchMap } from 'rxjs';
+import { Dishes } from 'src/app/shared/interfaces/dishes';
+import { DishesService } from 'src/app/core/services/dishes.service';
 
 @Component({
   selector: 'app-categories',
@@ -17,12 +19,14 @@ import { switchMap } from 'rxjs';
 export class CategoriesComponent implements OnInit {
   categories$: Observable<Categories[]> | undefined;
   authorizedUser$: Observable<boolean> | undefined;
+  foundedDishes$: Observable<Dishes[]> | undefined;
 
   constructor(
     private authService: AuthService,
     public dialog: MatDialog,
     private categoryService: CategoryService,
-    private destroyRef: DestroyRef
+    private destroyRef: DestroyRef,
+    private dishesService: DishesService
   ) {}
 
   ngOnInit(): void {
@@ -30,6 +34,7 @@ export class CategoriesComponent implements OnInit {
     this.categories$ = this.categoryService.currentCategories$;
     this.update();
     this.authorizedUser$ = this.authService.currentAuth$;
+    this.foundedDishes$ = this.dishesService.foundDishes$;
   }
 
   openDialog(): void {
@@ -62,6 +67,10 @@ export class CategoriesComponent implements OnInit {
   }
 
   trackByCategory(index: number, item: Categories): string {
+    return item.id;
+  }
+
+  trackByDishes(index: number, item: Dishes): string {
     return item.id;
   }
 }

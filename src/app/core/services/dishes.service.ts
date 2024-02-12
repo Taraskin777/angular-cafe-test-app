@@ -23,6 +23,10 @@ export class DishesService {
 
   currentDishes$ = this.dishes.asObservable();
 
+  private foundDishes = new BehaviorSubject<Dishes[]>([]);
+
+  foundDishes$ = this.foundDishes.asObservable();
+
   constructor(private http: HttpClient) {}
 
   public getDishesFromCategory(category: string): Observable<Dishes[]> {
@@ -89,14 +93,25 @@ export class DishesService {
       );
   }
 
-  public findDishes(
-    dishes$: Observable<Dishes[]>,
-    dishName: string
-  ): Observable<Dishes[]> {
-    return dishes$.pipe(
-      map(dishes => {
-        return dishes.filter(dish => dish.name === dishName);
+  public findDishes(dishName: string): Observable<Dishes[]> {
+    const trimmedDishName = dishName.trim();
+    return this.http.get<Dishes[]>(`${this.url}/dishes`).pipe(
+      map((dishes: Dishes[]) => {
+        return dishes.filter((dish: Dishes) =>
+          dish.name.toLowerCase().includes(trimmedDishName.toLowerCase())
+        );
+      }),
+      tap((filteredDishes: Dishes[]) => {
+        this.foundDishes.next(filteredDishes);
+      }),
+      catchError(error => {
+        console.error('Error fetching dishes:', error);
+        return throwError(() => new Error('Error'));
       })
     );
+  }
+
+  public clearFoundDishes(): void {
+    this.foundDishes.next([]);
   }
 }
