@@ -19,6 +19,7 @@ export class CategoryComponent implements OnInit {
   dishes$: Observable<Dishes[]> | undefined;
   authorizedUser$: Observable<boolean> | undefined;
   categoryId: string = '';
+  foundedDishes$: Observable<Dishes[]> | undefined;
 
   constructor(
     private route: ActivatedRoute,
@@ -33,6 +34,7 @@ export class CategoryComponent implements OnInit {
     this.dishes$ = this.dishesService.currentDishes$;
     this.authService.checkAdminStatus();
     this.authorizedUser$ = this.authService.currentAuth$;
+    this.foundedDishes$ = this.dishesService.foundDishes$;
   }
 
   update() {

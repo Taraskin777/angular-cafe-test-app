@@ -70,7 +70,4 @@ export class CategoriesComponent implements OnInit {
     return item.id;
   }
 
-  trackByDishes(index: number, item: Dishes): string {
-    return item.id;
-  }
 }

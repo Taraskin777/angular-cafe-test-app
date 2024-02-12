@@ -25,4 +25,7 @@
   <ng-container *ngIf="authorizedUser$ | async">
     <button mat-raised-button class="new_cat_btn" (click)="openDialogForAddDish()">Add New Dish</button>
  </ng-container>
+ <ng-container *ngIf="foundedDishes$ | async as foundedDishes">
+  <app-founded-dishes *ngIf="foundedDishes.length > 0"></app-founded-dishes>
+</ng-container>
 </main>
