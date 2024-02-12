@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from 'src/app/core/services/data.service';
 import { Dishes } from 'src/app/shared/interfaces/dishes';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
@@ -22,7 +21,6 @@ export class CategoryComponent implements OnInit {
   categoryId: string = '';
 
   constructor(
-    private dataService: DataService,
     private route: ActivatedRoute,
     public dialog: MatDialog,
     private authService: AuthService,
@@ -32,13 +30,13 @@ export class CategoryComponent implements OnInit {
   ngOnInit(): void {
     this.categoryId = String(this.route.snapshot.paramMap.get('categoryId'));
     this.update();
-    this.dishes$ = this.dataService.currentDishes$;
+    this.dishes$ = this.dishesService.currentDishes$;
     this.authService.checkAdminStatus();
     this.authorizedUser$ = this.authService.currentAuth$;
   }
 
   update() {
-    this.dataService.updateDishes(this.categoryId).pipe(take(1)).subscribe();
+    this.dishesService.updateDishes(this.categoryId).pipe(take(1)).subscribe();
   }
 
   openDialog(dish: Dishes): void {
@@ -68,7 +66,7 @@ export class CategoryComponent implements OnInit {
         .removeDish(dish.id)
         .pipe(take(1))
         .subscribe(() => {
-          this.dataService.updateDishes(this.categoryId).subscribe();
+          this.dishesService.updateDishes(this.categoryId).subscribe();
         });
     }
   }

@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, catchError, throwError } from 'rxjs';
+import { Observable, catchError, throwError, BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environment/environment';
 import { Dishes } from 'src/app/shared/interfaces/dishes';
+import { map, tap } from 'rxjs';
 
 export interface NewDish {
   categoryId: string;
@@ -18,7 +19,37 @@ export interface NewDish {
 export class DishesService {
   url: string = environment.url;
 
+  private dishes = new BehaviorSubject<Dishes[]>([]);
+
+  currentDishes$ = this.dishes.asObservable();
+
   constructor(private http: HttpClient) {}
+
+  public getDishesFromCategory(category: string): Observable<Dishes[]> {
+    return this.http
+      .get<Dishes[]>(`${this.url}/dishes?categoryId=${category}`)
+      .pipe(
+        catchError(error => {
+          console.error(
+            `Error fetching dishes for category with category ${category}:`,
+            error
+          );
+          return throwError(() => new Error('test'));
+        })
+      );
+  }
+
+  public updateDishes(categoryId: string): Observable<Dishes[]> {
+    return this.getDishesFromCategory(categoryId).pipe(
+      tap((dishes: Dishes[]) => {
+        this.dishes.next(dishes);
+      }),
+      catchError(error => {
+        console.log('Error updating dishes: ', error);
+        return throwError(() => new Error('test'));
+      })
+    );
+  }
 
   public addDish(dish: NewDish): Observable<Dishes> {
     return this.http.post<Dishes>(`${this.url}/dishes`, dish).pipe(
@@ -56,5 +87,16 @@ export class DishesService {
           return throwError(() => new Error('Error'));
         })
       );
+  }
+
+  public findDishes(
+    dishes$: Observable<Dishes[]>,
+    dishName: string
+  ): Observable<Dishes[]> {
+    return dishes$.pipe(
+      map(dishes => {
+        return dishes.filter(dish => dish.name === dishName);
+      })
+    );
   }
 }

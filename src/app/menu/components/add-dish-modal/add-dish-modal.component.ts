@@ -3,8 +3,6 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { switchMap, take } from 'rxjs';
 import { DishesService } from 'src/app/core/services/dishes.service';
-import { DataService } from 'src/app/core/services/data.service';
-import { NewDish } from 'src/app/core/services/dishes.service';
 
 export interface DialogData {
   categoryId: string;
@@ -22,7 +20,6 @@ export class AddDishModalComponent {
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     public dialog: MatDialog,
     private fb: FormBuilder,
-    private dataService: DataService,
     private dishService: DishesService
   ) {
     this.form = this.fb.group({
@@ -50,7 +47,7 @@ export class AddDishModalComponent {
       this.dishService
         .addDish(newDish)
         .pipe(
-          switchMap(() => this.dataService.updateDishes(newDish.categoryId)),
+          switchMap(() => this.dishService.updateDishes(newDish.categoryId)),
           take(1)
         )
         .subscribe({

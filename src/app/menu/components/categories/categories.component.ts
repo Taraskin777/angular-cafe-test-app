@@ -1,5 +1,4 @@
 import { Component, OnInit, DestroyRef } from '@angular/core';
-import { DataService } from 'src/app/core/services/data.service';
 import { Categories } from 'src/app/shared/interfaces/categories';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth.service';
@@ -20,7 +19,6 @@ export class CategoriesComponent implements OnInit {
   authorizedUser$: Observable<boolean> | undefined;
 
   constructor(
-    private dataService: DataService,
     private authService: AuthService,
     public dialog: MatDialog,
     private categoryService: CategoryService,
@@ -29,7 +27,7 @@ export class CategoriesComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.checkAdminStatus();
-    this.categories$ = this.dataService.currentCategories$;
+    this.categories$ = this.categoryService.currentCategories$;
     this.update();
     this.authorizedUser$ = this.authService.currentAuth$;
   }
@@ -39,7 +37,7 @@ export class CategoriesComponent implements OnInit {
   }
 
   update() {
-    this.dataService
+    this.categoryService
       .updateCategories()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe();
@@ -57,7 +55,7 @@ export class CategoriesComponent implements OnInit {
       .pipe(
         takeUntilDestroyed(this.destroyRef),
         switchMap(() => {
-          return this.dataService.updateCategories();
+          return this.categoryService.updateCategories();
         })
       )
       .subscribe();

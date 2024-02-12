@@ -4,7 +4,6 @@ import { Categories } from 'src/app/shared/interfaces/categories';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { switchMap, take } from 'rxjs';
 import { CategoryService } from 'src/app/core/services/category.service';
-import { DataService } from 'src/app/core/services/data.service';
 
 @Component({
   selector: 'app-edit-cat-modal',
@@ -19,8 +18,7 @@ export class EditCatModalComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: Categories,
     public dialog: MatDialog,
     private fb: FormBuilder,
-    private categoryService: CategoryService,
-    private dataService: DataService
+    private categoryService: CategoryService
   ) {
     this.form = this.fb.group({
       name: this.fb.control('', [Validators.required]),
@@ -56,7 +54,7 @@ export class EditCatModalComponent implements OnInit {
       this.categoryService
         .editCategory(updatedCategory.id, updatedCategory)
         .pipe(
-          switchMap(() => this.dataService.updateCategories()),
+          switchMap(() => this.categoryService.updateCategories()),
           take(1)
         )
         .subscribe({
