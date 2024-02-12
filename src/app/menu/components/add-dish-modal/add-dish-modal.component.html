@@ -14,13 +14,15 @@
      </div>
      <div>
        <label for="price">Dish price</label>
-       <input type="text" formControlName="price" id="price" />
+       <input type="text" formControlName="price" id="price"/>
      </div>
      <button
        mat-raised-button
        (click)="closeDialog()"
        class="modal_btn"
-       type="submit">
+       type="submit"
+       [disabled]="!form.valid"
+       >
        Add Dish
      </button>
    </form>

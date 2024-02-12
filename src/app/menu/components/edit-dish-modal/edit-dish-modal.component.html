@@ -20,7 +20,8 @@
        mat-raised-button
        (click)="closeDialog()"
        class="modal_btn"
-       type="submit">
+       type="submit"
+       [disabled]="!form.valid">
        Save Dish
      </button>
    </form>

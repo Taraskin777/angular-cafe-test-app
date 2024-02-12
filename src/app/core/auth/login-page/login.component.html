@@ -9,7 +9,7 @@
          <label for="password">Password</label>
          <input type="password" name="password" formControlName="password">
       </div>
-      <button type="submit">Submit</button>
+      <button type="submit" [disabled]="!form.valid">Submit</button>
    </form>
     <div><p>{{logMessage}}</p></div>
 </main>

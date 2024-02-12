@@ -23,10 +23,16 @@ export class EditDishModalComponent {
     private dishService: DishesService
   ) {
     this.form = this.fb.group({
-      name: this.fb.control('', [Validators.required]),
+      name: this.fb.control('', [Validators.required, Validators.minLength(3)]),
       image: this.fb.control('', [Validators.required]),
-      description: this.fb.control('', [Validators.required]),
-      price: this.fb.control('', [Validators.required]),
+      description: this.fb.control('', [
+        Validators.required,
+        Validators.minLength(10),
+      ]),
+      price: this.fb.control('', [
+        Validators.required,
+        Validators.pattern(/^(?!0\d)(?!0$)\d*(\.\d+)?$/),
+      ]),
     });
   }
 

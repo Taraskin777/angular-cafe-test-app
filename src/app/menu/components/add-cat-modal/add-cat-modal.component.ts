@@ -21,7 +21,11 @@ export class AddCatModalComponent {
     private categoryService: CategoryService
   ) {
     this.form = this.fb.group({
-      name: this.fb.control('', [Validators.required]),
+      name: this.fb.control('', [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(25),
+      ]),
       image: this.fb.control('', [Validators.required]),
     });
   }
