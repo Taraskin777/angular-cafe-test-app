@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AuthInterceptorService } from './core/services/auth-interceptor.service';
 import { AppRoutingModule } from './app-routing.module';
@@ -10,6 +10,8 @@ import { MenuModule } from './menu/menu.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { counterReducer } from './counter.reducer';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [AppComponent, PageNotFoundComponent],
@@ -21,6 +23,8 @@ import { counterReducer } from './counter.reducer';
     CoreModule,
     MenuModule,
     HttpClientModule,
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
+    EffectsModule.forRoot([]),
   ],
   providers: [
     {
