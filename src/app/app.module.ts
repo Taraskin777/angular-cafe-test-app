@@ -9,6 +9,7 @@ import { CoreModule } from './core/core.module';
 import { MenuModule } from './menu/menu.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { counterReducer } from './counter.reducer';
 
 @NgModule({
   declarations: [AppComponent, PageNotFoundComponent],
@@ -16,7 +17,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot({ count: counterReducer }),
     CoreModule,
     MenuModule,
     HttpClientModule,

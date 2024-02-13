@@ -8,9 +8,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { AuthModule } from './auth/auth.module';
 import { CoreRoutingModule } from './core-routing.module';
+import { MyCounterComponent } from './components/my-counter/my-counter.component';
 
 @NgModule({
-  declarations: [HeaderComponent],
+  declarations: [HeaderComponent, MyCounterComponent],
   imports: [
     CommonModule,
     MatIconModule,
