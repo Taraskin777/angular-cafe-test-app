@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from 'src/app/core/services/data.service';
 import { Dishes } from 'src/app/shared/interfaces/dishes';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../../components/modal/modal.component';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { AddDishModalComponent } from '../../components/add-dish-modal/add-dish-modal.component';
+import { DishesService } from 'src/app/core/services/dishes.service';
+import { take, switchMap } from 'rxjs';
+import { EditDishModalComponent } from '../../components/edit-dish-modal/edit-dish-modal.component';
 
 @Component({
   selector: 'app-category',
@@ -15,19 +18,27 @@ import { AuthService } from 'src/app/core/services/auth.service';
 export class CategoryComponent implements OnInit {
   dishes$: Observable<Dishes[]> | undefined;
   authorizedUser$: Observable<boolean> | undefined;
+  categoryId: string = '';
+  foundedDishes$: Observable<Dishes[]> | undefined;
 
   constructor(
-    private dataService: DataService,
     private route: ActivatedRoute,
     public dialog: MatDialog,
-    private authService: AuthService
+    private authService: AuthService,
+    private dishesService: DishesService
   ) {}
 
   ngOnInit(): void {
-    const category = Number(this.route.snapshot.paramMap.get('categoryId'));
-    this.dishes$ = this.dataService.getDishesFromCategory(category);
+    this.categoryId = String(this.route.snapshot.paramMap.get('categoryId'));
+    this.update();
+    this.dishes$ = this.dishesService.currentDishes$;
     this.authService.checkAdminStatus();
     this.authorizedUser$ = this.authService.currentAuth$;
+    this.foundedDishes$ = this.dishesService.foundDishes$;
+  }
+
+  update() {
+    this.dishesService.updateDishes(this.categoryId).pipe(take(1)).subscribe();
   }
 
   openDialog(dish: Dishes): void {
@@ -39,7 +50,31 @@ export class CategoryComponent implements OnInit {
     });
   }
 
-  trackByDishes(index: number, item: Dishes): number {
+  openDialogForAddDish(): void {
+    this.dialog.open(AddDishModalComponent, {
+      data: { categoryId: this.categoryId },
+    });
+  }
+
+  openDialogForEditDish(dish: Dishes): void {
+    this.dialog.open(EditDishModalComponent, {
+      data: dish,
+    });
+  }
+
+  deleteDish(dish: Dishes): void {
+    if (dish.id) {
+      this.dishesService
+        .removeDish(dish.id)
+        .pipe(
+          take(1),
+          switchMap(() => this.dishesService.updateDishes(this.categoryId))
+        )
+        .subscribe();
+    }
+  }
+
+  trackByDishes(index: number, item: Dishes): string {
     return item.id;
   }
 }

@@ -5,7 +5,7 @@ import { Categories } from 'src/app/shared/interfaces/categories';
 import { environment } from 'src/environment/environment';
 import { switchMap, forkJoin } from 'rxjs';
 import { Dishes } from 'src/app/shared/interfaces/dishes';
-import { of } from 'rxjs';
+import { of, tap } from 'rxjs';
 
 interface NewCategory {
   name: string;
@@ -18,7 +18,32 @@ interface NewCategory {
 export class CategoryService {
   url: string = environment.url;
 
+  private categories = new BehaviorSubject<Categories[]>([]);
+
+  currentCategories$ = this.categories.asObservable();
+
   constructor(private http: HttpClient) {}
+
+  public getAllCategories(): Observable<Categories[]> {
+    return this.http.get<Categories[]>(`${this.url}/categories`).pipe(
+      catchError(error => {
+        console.error('Error fetching categories:', error);
+        return throwError(() => new Error('Error fetching categories'));
+      })
+    );
+  }
+
+  public updateCategories(): Observable<Categories[]> {
+    return this.getAllCategories().pipe(
+      tap((categories: Categories[]) => {
+        this.categories.next(categories);
+      }),
+      catchError(error => {
+        console.error('Error updating categories:', error);
+        return throwError(() => new Error('Error updating categories'));
+      })
+    );
+  }
 
   public addCategory(newCategory: NewCategory): Observable<Categories> {
     return this.http
@@ -26,7 +51,7 @@ export class CategoryService {
       .pipe(
         catchError(error => {
           console.error('Error add new category:', error);
-          return throwError(() => new Error('Error'));
+          return throwError(() => new Error('Error adding new category'));
         })
       );
   }
@@ -89,7 +114,7 @@ export class CategoryService {
       .pipe(
         catchError(error => {
           console.error('Error updating category:', error);
-          return throwError(() => new Error('Error updating category'));
+          return throwError(() => new Error('Error edit category'));
         })
       );
   }

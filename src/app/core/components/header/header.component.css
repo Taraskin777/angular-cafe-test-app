@@ -1,3 +1,7 @@
+header {
+  height: 180px;
+}
+
 h1 {
   text-align: center;
   color: blue;
@@ -22,6 +26,11 @@ h1 {
 .log_btn:hover {
   color: blue;
   transition: all 0.3s;
+}
+
+.search{
+  margin-right: 20px;
+  width: 200px;
 }
 
 

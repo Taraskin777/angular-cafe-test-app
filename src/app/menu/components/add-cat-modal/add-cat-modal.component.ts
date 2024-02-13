@@ -4,7 +4,6 @@ import { Categories } from 'src/app/shared/interfaces/categories';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { take } from 'rxjs';
 import { CategoryService } from 'src/app/core/services/category.service';
-import { DataService } from 'src/app/core/services/data.service';
 import { switchMap } from 'rxjs';
 
 @Component({
@@ -19,11 +18,14 @@ export class AddCatModalComponent {
     @Inject(MAT_DIALOG_DATA) public data: Categories,
     public dialog: MatDialog,
     private fb: FormBuilder,
-    private categoryService: CategoryService,
-    private dataService: DataService
+    private categoryService: CategoryService
   ) {
     this.form = this.fb.group({
-      name: this.fb.control('', [Validators.required]),
+      name: this.fb.control('', [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(25),
+      ]),
       image: this.fb.control('', [Validators.required]),
     });
   }
@@ -39,8 +41,8 @@ export class AddCatModalComponent {
       this.categoryService
         .addCategory(newCategory)
         .pipe(
-          switchMap(() => this.dataService.updateCategories()),
-          take(1),
+          switchMap(() => this.categoryService.updateCategories()),
+          take(1)
         )
         .subscribe({
           next: () => {

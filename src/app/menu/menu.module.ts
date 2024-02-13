@@ -7,9 +7,12 @@ import { CategoriesComponent } from './components/categories/categories.componen
 import { MainComponent } from './pages/main/main.component';
 import { CategoryComponent } from './pages/category/category.component';
 import { ModalComponent } from './components/modal/modal.component';
+import { AddDishModalComponent } from './components/add-dish-modal/add-dish-modal.component';
+import { EditDishModalComponent } from './components/edit-dish-modal/edit-dish-modal.component';
 import { AddCatModalComponent } from './components/add-cat-modal/add-cat-modal.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EditCatModalComponent } from './components/edit-cat-modal/edit-cat-modal.component';
+import { FoundedDishesComponent } from './components/founded-dishes/founded-dishes.component';
 
 @NgModule({
   declarations: [
@@ -17,8 +20,11 @@ import { EditCatModalComponent } from './components/edit-cat-modal/edit-cat-moda
     MainComponent,
     CategoryComponent,
     ModalComponent,
+    AddDishModalComponent,
+    EditDishModalComponent,
     AddCatModalComponent,
     EditCatModalComponent,
+    FoundedDishesComponent,
   ],
   imports: [
     CommonModule,

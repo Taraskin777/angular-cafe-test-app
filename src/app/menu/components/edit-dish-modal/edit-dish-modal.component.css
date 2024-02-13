@@ -1,0 +1,22 @@
+.modal {
+   height: fit-content;
+   width: 250px;
+   padding: 10px;
+}
+
+form {
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   gap: 20px;
+   align-items: center;
+   text-align: center;
+}
+
+label {
+   margin-bottom: 20px;
+}
+
+.modal_btn {
+   width: 150px;
+}

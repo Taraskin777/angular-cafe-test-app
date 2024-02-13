@@ -1,0 +1,16 @@
+<ng-container *ngIf="foundedDishes$ | async as foundedDishes; else noDishes" class="foundDishes_wrapper">
+   <h3>Founded Dishes</h3>
+   <ul *ngIf="foundedDishes.length > 0; else noDishes">
+     <li *ngFor="let dish of foundedDishes; trackBy: trackByDishes">
+       <img [src]="dish.image" [alt]="dish.name" />
+       <p>{{ dish.name }}</p>
+       <p>Price: {{ dish.price }} $</p>
+       <button mat-raised-button class="details_btn" (click)="openDialog(dish)">
+         Details
+       </button>
+     </li>
+   </ul>
+ </ng-container>
+ <ng-template #noDishes>
+   <h2>No founded dishes</h2>
+ </ng-template>

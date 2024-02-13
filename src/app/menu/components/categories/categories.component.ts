@@ -1,5 +1,4 @@
 import { Component, OnInit, DestroyRef } from '@angular/core';
-import { DataService } from 'src/app/core/services/data.service';
 import { Categories } from 'src/app/shared/interfaces/categories';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth.service';
@@ -8,7 +7,9 @@ import { AddCatModalComponent } from '../add-cat-modal/add-cat-modal.component';
 import { CategoryService } from 'src/app/core/services/category.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { EditCatModalComponent } from '../edit-cat-modal/edit-cat-modal.component';
-import {switchMap } from 'rxjs';
+import { switchMap } from 'rxjs';
+import { Dishes } from 'src/app/shared/interfaces/dishes';
+import { DishesService } from 'src/app/core/services/dishes.service';
 
 @Component({
   selector: 'app-categories',
@@ -18,29 +19,33 @@ import {switchMap } from 'rxjs';
 export class CategoriesComponent implements OnInit {
   categories$: Observable<Categories[]> | undefined;
   authorizedUser$: Observable<boolean> | undefined;
+  foundedDishes$: Observable<Dishes[]> | undefined;
 
   constructor(
-    private dataService: DataService,
     private authService: AuthService,
     public dialog: MatDialog,
     private categoryService: CategoryService,
-    private destroyRef: DestroyRef
+    private destroyRef: DestroyRef,
+    private dishesService: DishesService
   ) {}
 
   ngOnInit(): void {
     this.authService.checkAdminStatus();
-    this.categories$ = this.dataService.currentCategories$;
+    this.categories$ = this.categoryService.currentCategories$;
     this.update();
-    this.categories$.subscribe();
     this.authorizedUser$ = this.authService.currentAuth$;
+    this.foundedDishes$ = this.dishesService.foundDishes$;
   }
 
   openDialog(): void {
     this.dialog.open(AddCatModalComponent);
   }
 
-  update() {
-    this.dataService.updateCategories().subscribe();
+  update(): void {
+    this.categoryService
+      .updateCategories()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe();
   }
 
   openDialogForEdit(category: Categories): void {
@@ -55,7 +60,7 @@ export class CategoriesComponent implements OnInit {
       .pipe(
         takeUntilDestroyed(this.destroyRef),
         switchMap(() => {
-          return this.dataService.updateCategories();
+          return this.categoryService.updateCategories();
         })
       )
       .subscribe();
