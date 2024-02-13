@@ -60,10 +60,7 @@ export class EditDishModalComponent {
       const updatedDish: Dishes = {
         id: this.data.id,
         categoryId: this.data.categoryId,
-        name: this.form.value.name,
-        image: this.form.value.image,
-        description: this.form.value.description,
-        price: this.form.value.price,
+        ...this.form.value,
       };
       this.dishService
         .editDish(updatedDish.id, updatedDish)

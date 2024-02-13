@@ -41,7 +41,7 @@ export class CategoriesComponent implements OnInit {
     this.dialog.open(AddCatModalComponent);
   }
 
-  update():void {
+  update(): void {
     this.categoryService
       .updateCategories()
       .pipe(takeUntilDestroyed(this.destroyRef))
@@ -69,5 +69,4 @@ export class CategoriesComponent implements OnInit {
   trackByCategory(index: number, item: Categories): string {
     return item.id;
   }
-
 }
