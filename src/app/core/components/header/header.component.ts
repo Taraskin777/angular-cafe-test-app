@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
-import { Observable, take } from 'rxjs';
-import { DishesService } from '../../services/dishes.service';
+import { Observable } from 'rxjs';
+import {
+  clearFoundedDishes,
+  foundedDishes,
+} from 'src/app/store/dishes.actions';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/store/app.state';
 
 @Component({
   selector: 'app-header',
@@ -16,7 +21,7 @@ export class HeaderComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private dishesService: DishesService
+    private store: Store<AppState>
   ) {}
 
   ngOnInit(): void {
@@ -31,9 +36,9 @@ export class HeaderComponent implements OnInit {
 
   searchDishes(): void {
     if (this.searchValue.length >= 3) {
-      this.dishesService.findDishes(this.searchValue).pipe(take(1)).subscribe();
+      this.store.dispatch(foundedDishes({ dishName: this.searchValue }));
     } else if (this.searchValue.length < 3) {
-      this.dishesService.clearFoundDishes();
+      this.store.dispatch(clearFoundedDishes());
     }
   }
 }
