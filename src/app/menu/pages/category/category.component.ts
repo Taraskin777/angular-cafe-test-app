@@ -33,7 +33,7 @@ export class CategoryComponent implements OnInit {
   ngOnInit(): void {
     this.categoryId = String(this.route.snapshot.paramMap.get('categoryId'));
     this.update();
-    this.dishes$ = this.dishesService.getDishesFromCategory(this.categoryId);
+    this.dishes$ = this.dishesService.currentDishes$;
     this.authService.checkAdminStatus();
     this.authorizedUser$ = this.authService.currentAuth$;
     this.foundedDishes$ = this.store.pipe(
@@ -72,8 +72,8 @@ export class CategoryComponent implements OnInit {
       this.dishesService
         .removeDish(dish.id)
         .pipe(
-          take(1),
-          switchMap(() => this.dishesService.updateDishes(this.categoryId))
+          switchMap(() => this.dishesService.updateDishes(this.categoryId)),
+          take(1)
         )
         .subscribe();
     }

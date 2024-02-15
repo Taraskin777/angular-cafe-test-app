@@ -12,18 +12,6 @@ export class DishesEffects {
     private dishesService: DishesService
   ) {}
 
-  currentDishes$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType('[DISHES] Update Dishes'),
-      switchMap(({ categoryId }) =>
-        this.dishesService.updateDishes(categoryId).pipe(
-          map(dishes => DishesActions.currentDishes({ dishes })),
-          catchError(error => of(/* handle error */))
-        )
-      )
-    )
-  );
-
   findDishes$ = createEffect(() =>
     this.actions$.pipe(
       ofType('[DISHES] Set Founded Dishes'),

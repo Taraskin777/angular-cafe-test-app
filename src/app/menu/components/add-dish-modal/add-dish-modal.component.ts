@@ -44,10 +44,7 @@ export class AddDishModalComponent {
     if (this.form.valid) {
       const newDish = {
         categoryId: this.data.categoryId,
-        name: this.form.value.name,
-        image: this.form.value.image,
-        description: this.form.value.description,
-        price: this.form.value.price,
+        ...this.form.value,
       };
 
       this.dishService

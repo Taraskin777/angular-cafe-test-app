@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
-import { Observable, take } from 'rxjs';
-import { DishesService } from '../../services/dishes.service';
+import { Observable } from 'rxjs';
 import {
   clearFoundedDishes,
   foundedDishes,
@@ -22,7 +21,6 @@ export class HeaderComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private dishesService: DishesService,
     private store: Store<AppState>
   ) {}
 
@@ -36,14 +34,6 @@ export class HeaderComponent implements OnInit {
     this.router.navigateByUrl('/');
   }
 
-  // searchDishes(): void {
-  //   if (this.searchValue.length >= 3) {
-  //     this.dishesService.findDishes(this.searchValue).pipe(take(1)).subscribe();
-  //   } else if (this.searchValue.length < 3) {
-  //     // this.dishesService.clearFoundDishes();
-  //   }
-  // }
-
   searchDishes(): void {
     if (this.searchValue.length >= 3) {
       this.store.dispatch(foundedDishes({ dishName: this.searchValue }));
@@ -51,20 +41,4 @@ export class HeaderComponent implements OnInit {
       this.store.dispatch(clearFoundedDishes());
     }
   }
-
-  // searchDishes(): void {
-  //   if (this.searchValue.length >= 3) {
-  //     this.dishesService
-  //       .findDishes(this.searchValue)
-  //       .pipe(take(1))
-  //       .subscribe(dishes => {
-  //         console.log(dishes);  
-  //         this.store.dispatch(
-  //           foundedDishes({ dishName: this.searchValue, dishes })
-  //         );
-  //       });
-  //   } else if (this.searchValue.length < 3) {
-  //     this.store.dispatch(clearFoundedDishes());
-  //   }
-  // }
 }
