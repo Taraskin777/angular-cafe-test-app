@@ -1,6 +1,6 @@
 import { Component, OnInit, DestroyRef } from '@angular/core';
 import { Categories } from 'src/app/shared/interfaces/categories';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddCatModalComponent } from '../add-cat-modal/add-cat-modal.component';
@@ -10,6 +10,9 @@ import { EditCatModalComponent } from '../edit-cat-modal/edit-cat-modal.componen
 import { switchMap } from 'rxjs';
 import { Dishes } from 'src/app/shared/interfaces/dishes';
 import { DishesService } from 'src/app/core/services/dishes.service';
+import { Store, select } from '@ngrx/store';
+import { AppState } from 'src/app/store/app.state';
+import { foundedDishes } from 'src/app/store/dishes.actions';
 
 @Component({
   selector: 'app-categories',
@@ -26,7 +29,8 @@ export class CategoriesComponent implements OnInit {
     public dialog: MatDialog,
     private categoryService: CategoryService,
     private destroyRef: DestroyRef,
-    private dishesService: DishesService
+    private dishesService: DishesService,
+    private store: Store<AppState>
   ) {}
 
   ngOnInit(): void {
@@ -34,7 +38,13 @@ export class CategoriesComponent implements OnInit {
     this.categories$ = this.categoryService.currentCategories$;
     this.update();
     this.authorizedUser$ = this.authService.currentAuth$;
-    this.foundedDishes$ = this.dishesService.foundDishes$;
+    // this.foundedDishes$ = this.store.select(
+    //   state => state.dishes.foundedDishes
+    // );
+    this.foundedDishes$ = this.store.pipe(
+      select(state => state.dishes.foundedDishes),
+      map(dishes => dishes || [])
+    );
   }
 
   openDialog(): void {

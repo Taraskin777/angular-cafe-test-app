@@ -9,9 +9,10 @@ import { CoreModule } from './core/core.module';
 import { MenuModule } from './menu/menu.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { counterReducer } from './counter.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
+import { dishesReducer } from './store/dishes.reducer';
+import { DishesEffects } from './store/dishes.effects';
 
 @NgModule({
   declarations: [AppComponent, PageNotFoundComponent],
@@ -19,12 +20,12 @@ import { EffectsModule } from '@ngrx/effects';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    StoreModule.forRoot({ count: counterReducer }),
+    StoreModule.forRoot({ dishes: dishesReducer }),
     CoreModule,
     MenuModule,
     HttpClientModule,
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot([DishesEffects]),
   ],
   providers: [
     {
