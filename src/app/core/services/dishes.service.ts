@@ -23,7 +23,6 @@ export class DishesService {
 
   currentDishes$ = this.dishes.asObservable();
 
-
   constructor(private http: HttpClient) {}
 
   public getDishesFromCategory(category: string): Observable<Dishes[]> {
@@ -51,15 +50,6 @@ export class DishesService {
       })
     );
   }
-
-  // public updateDishes(categoryId: string): Observable<Dishes[]> {
-  //   return this.getDishesFromCategory(categoryId).pipe(
-  //     catchError(error => {
-  //       console.log('Error updating dishes: ', error);
-  //       return throwError(() => new Error('Error'));
-  //     })
-  //   );
-  // }
 
   public addDish(dish: NewDish): Observable<Dishes> {
     return this.http.post<Dishes>(`${this.url}/dishes`, dish).pipe(
@@ -99,8 +89,6 @@ export class DishesService {
       );
   }
 
-
-
   public findDishes(dishName: string): Observable<Dishes[]> {
     const trimmedDishName = dishName.trim();
     return this.http.get<Dishes[]>(`${this.url}/dishes`).pipe(
@@ -115,6 +103,4 @@ export class DishesService {
       })
     );
   }
-
-
 }
