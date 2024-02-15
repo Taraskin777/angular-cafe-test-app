@@ -1,13 +1,10 @@
-import { Component, OnInit, DestroyRef } from '@angular/core';
-import { DishesService } from 'src/app/core/services/dishes.service';
-import { Observable } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Observable, map } from 'rxjs';
 import { Dishes } from 'src/app/shared/interfaces/dishes';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../modal/modal.component';
 import { Store, select } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.state';
-import { foundedDishes } from 'src/app/store/dishes.actions';
-import { map } from 'rxjs';
 
 @Component({
   selector: 'app-founded-dishes',
@@ -19,14 +16,10 @@ export class FoundedDishesComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
-    private dishesService: DishesService,
     private store: Store<AppState>
   ) {}
 
   ngOnInit(): void {
-    // this.foundedDishes$ = this.store.select(
-    //   state => state.dishes.foundedDishes
-    // );
     this.foundedDishes$ = this.store.pipe(
       select(state => state.dishes.foundedDishes),
       map(dishes => dishes || [])

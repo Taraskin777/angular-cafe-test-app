@@ -1,18 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Dishes } from 'src/app/shared/interfaces/dishes';
-import { Observable, map } from 'rxjs';
+import { Observable, map, take, switchMap } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../../components/modal/modal.component';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { AddDishModalComponent } from '../../components/add-dish-modal/add-dish-modal.component';
 import { DishesService } from 'src/app/core/services/dishes.service';
-import { take, switchMap } from 'rxjs';
 import { EditDishModalComponent } from '../../components/edit-dish-modal/edit-dish-modal.component';
 import { Store, select } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.state';
-
-
 
 @Component({
   selector: 'app-category',
@@ -39,9 +36,6 @@ export class CategoryComponent implements OnInit {
     this.dishes$ = this.dishesService.getDishesFromCategory(this.categoryId);
     this.authService.checkAdminStatus();
     this.authorizedUser$ = this.authService.currentAuth$;
-    // this.foundedDishes$ = this.store.select(
-    //   state => state.dishes.foundedDishes
-    // );
     this.foundedDishes$ = this.store.pipe(
       select(state => state.dishes.foundedDishes),
       map(dishes => dishes || [])
