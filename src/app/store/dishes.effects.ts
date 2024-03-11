@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { switchMap, map, catchError, exhaustMap } from 'rxjs/operators';
+import { map, catchError, exhaustMap } from 'rxjs/operators';
 import { DishesService } from '../core/services/dishes.service';
 import { of } from 'rxjs';
 import * as DishesActions from './dishes.actions';

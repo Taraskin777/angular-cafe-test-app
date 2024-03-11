@@ -19,7 +19,7 @@ import { AppState } from 'src/app/store/app.state';
 export class CategoryComponent implements OnInit {
   dishes$: Observable<Dishes[]> | undefined;
   authorizedUser$: Observable<boolean> | undefined;
-  categoryId: string = '';
+  categoryId = '';
   foundedDishes$: Observable<Dishes[]> | undefined;
 
   constructor(

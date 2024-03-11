@@ -6,13 +6,12 @@ import {
   HttpRequest,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environment/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthInterceptorService implements HttpInterceptor {
-  constructor() {}
+  // constructor() {}
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
@@ -28,7 +27,6 @@ export class AuthInterceptorService implements HttpInterceptor {
     // }
     // return next.handle(req);
 
-    
     // const idToken = localStorage.getItem('id_token');
     // if (idToken) {
     //   const cloned = req.clone({

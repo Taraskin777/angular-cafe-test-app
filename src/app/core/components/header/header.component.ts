@@ -16,7 +16,7 @@ import { AppState } from 'src/app/store/app.state';
 })
 export class HeaderComponent implements OnInit {
   authorizedUser$: Observable<boolean> | undefined;
-  searchValue: string = '';
+  searchValue = '';
 
   constructor(
     private authService: AuthService,

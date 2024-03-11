@@ -86,7 +86,7 @@ export class CategoryService {
     );
   }
 
-  private deleteDishes(dishes: Dishes[]): Observable<Object[]> {
+  private deleteDishes(dishes: Dishes[]): Observable<object[]> {
     return dishes.length
       ? forkJoin(
           dishes.map(dish => this.http.delete(`${this.url}/dishes/${dish.id}`))

@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { switchMap, take } from 'rxjs';
@@ -11,7 +11,7 @@ import { Dishes } from 'src/app/shared/interfaces/dishes';
   templateUrl: './edit-dish-modal.component.html',
   styleUrls: ['./edit-dish-modal.component.css'],
 })
-export class EditDishModalComponent {
+export class EditDishModalComponent implements OnInit {
   form: FormGroup;
   dish!: NewDish;
 

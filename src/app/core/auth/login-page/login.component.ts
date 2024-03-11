@@ -11,12 +11,12 @@ import { take } from 'rxjs';
 })
 export class LoginComponent {
   form: FormGroup;
-  logMessage: string = '';
+  logMessage = '';
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private authService: AuthService,
+    private authService: AuthService
   ) {
     this.form = this.fb.group({
       email: this.fb.control('', [Validators.required, Validators.email]),
